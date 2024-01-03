@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  font-family: "Assistant", sans-serif;
+  --primary-dark-color: #002b49;
+  --secondary-light-color: #ccbebc;
+  box-sizing: border-box;
+}
+
+.my-bg-primary {
+  background-color: var(--primary-dark-color);
+}
+
+.my-text-primary {
+  color: var(--primary-dark-color);
+}
+
+.my-bg-secondary {
+  background-color: var(--secondary-light-color);
+}
+
+.my-text-secondary {
+  color: var(--secondary-light-color);
+}
+
+h1 {
+  @apply text-6xl;
+}
+
+h2 {
+  @apply text-5xl;
+}
+
+h3 {
+  @apply text-4xl;
+}
+
+h4 {
+  @apply text-3xl;
+}
+
+h5 {
+  @apply text-2xl;
+}
+
+h6 {
+  @apply text-xl;
+}
+
+p,
+span {
+  @apply text-base;
+}
+
+button {
+  @apply rounded-xl
+  px-6 py-2 font-bold text-white;
+}
+
+.btn-effect {
+  @apply relative overflow-hidden rounded-xl
+   px-6 py-2 font-bold text-white transition-all
+   duration-200 ease-in-out
+   hover:scale-110 hover:bg-transparent active:scale-95;
+}
+.btn-effect::after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 100%;
+  right: 0;
+  bottom: 0;
+  @apply transition-all duration-200 ease-in-out;
+}
+.btn-effect:hover::after {
+  left: 0;
+}
+
+.my-btn-primary {
+  @apply my-bg-primary text-white hover:text-black;
+}
+.my-btn-primary:hover::after {
+  @apply my-bg-secondary;
+}
+
+.my-btn-secondary {
+  @apply my-bg-secondary text-black hover:text-white;
+}
+.my-btn-secondary:hover::after {
+  @apply my-bg-primary;
+}
+
+.page-padding {
+  @apply px-5 md:px-24 lg:px-40 xl:px-[18%];
+}
+
+.section {
+  @apply py-10 sm:py-20;
+}/*# sourceMappingURL=App.css.map */
