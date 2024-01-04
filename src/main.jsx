@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavbarManager from "./components/navbar/NavbarManager.jsx";
-import Home from "./pages/Home.jsx";
+import Home from "./pages/home/Home.jsx";
 import Projects from "./pages/Projects.jsx";
 import About from "./pages/About.jsx";
 import TheProcess from "./pages/TheProcess.jsx";

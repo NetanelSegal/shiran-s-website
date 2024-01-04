@@ -93,7 +93,7 @@ button {
 }
 
 .page-padding {
-  @apply px-5 md:px-24 lg:px-40 xl:px-[18%];
+  @apply overflow-x-hidden px-5 md:px-24 lg:px-40 xl:px-[18%];
 }
 
 .section {

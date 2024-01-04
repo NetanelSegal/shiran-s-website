@@ -23,7 +23,7 @@ const NavbarManager = () => {
   }, [screenWidth]);
   return (
     <>
-      {screenWidth <= 768 ? (
+      {screenWidth <= 1024 ? (
         <NavbarMobile logoSrc={logoSrc} />
       ) : (
         <NavbarDesktop logoSrc={logoSrc} />

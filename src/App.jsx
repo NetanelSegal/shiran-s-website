@@ -1,6 +1,6 @@
 import "./appStyle/App.css";
 import NavbarManager from "./components/navbar/NavbarManager";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 
 function App() {
   return (
