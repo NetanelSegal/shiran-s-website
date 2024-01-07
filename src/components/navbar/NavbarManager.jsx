@@ -18,9 +18,6 @@ const NavbarManager = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(screenWidth);
-  }, [screenWidth]);
   return (
     <>
       {screenWidth <= 1024 ? (

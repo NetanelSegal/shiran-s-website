@@ -3,7 +3,6 @@ import src1 from "../../assets/selectedProjectsImages/1.jpg";
 import src2 from "../../assets/selectedProjectsImages/2.jpg";
 import src3 from "../../assets/selectedProjectsImages/3.jpg";
 import src4 from "../../assets/selectedProjectsImages/4.jpg";
-import src5 from "../../assets/selectedProjectsImages/5.jpg";
 import { motion } from "framer-motion";
 
 const SelectedProjectsCarousel = () => {
@@ -35,14 +34,7 @@ const SelectedProjectsCarousel = () => {
         "Designing a commercial oasis that inspires productivity and creativity. This project redefines workspaces with cutting-edge design, incorporating collaborative zones and breakout areas to foster a dynamic and engaging work environment.",
     },
   ];
-  const enterAnimationVariants = {
-    from: { y: 200, opacity: 0 },
-    to: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 1, ease: "easeInOut", staggerChildren: 0.2 },
-    },
-  };
+
   const handleLeftOnCLick = () => {
     setSelectedIndexMiddle((prevState) =>
       prevState == selectedProjData.length - 1 ? 0 : prevState + 1,
@@ -55,19 +47,16 @@ const SelectedProjectsCarousel = () => {
     left: { scale: 0.9, x: "-98%", zIndex: -10, filter: "blur(5px)" },
     hidden: { opacity: 0, x: "200%", scale: 0.9 },
   };
+
   return (
     <>
-      <motion.div
-        whileInView="to"
-        initial="from"
-        variants={enterAnimationVariants}
-        className="relative mb-1 aspect-video w-full"
-      >
+      <div className="relative mb-1 aspect-video w-full">
         {/* images */}
         {selectedProjData.map((data, i) => (
           <motion.div
+            key={i}
             variants={variants}
-            animate={
+            whileInView={
               (selectedIndexMiddle == 0
                 ? i == selectedProjData.length - 1 && "right"
                 : i == selectedIndexMiddle - 1 && "right") ||
@@ -77,9 +66,10 @@ const SelectedProjectsCarousel = () => {
                 : i == selectedIndexMiddle + 1 && "left") ||
               "hidden"
             }
+            viewport={{ once: true }}
             transition={{
-              duration: 0.3,
-              ease: "easeOut",
+              duration: 1,
+              ease: "easeInOut",
             }}
             className="absolute top-0 aspect-video overflow-hidden rounded-xl"
           >
@@ -91,7 +81,7 @@ const SelectedProjectsCarousel = () => {
             />
           </motion.div>
         ))}
-      </motion.div>
+      </div>
       {/* buttons container */}
       <div className="flex flex-col items-center justify-end gap-1 sm:flex-row ">
         <div className="my-bg-primary w-full grow flex-row rounded-xl py-1 pl-4 pr-4 text-white sm:w-auto">

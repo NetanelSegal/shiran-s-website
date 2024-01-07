@@ -3,7 +3,7 @@ import "./style/Navbar.css";
 
 const NavbarDesktop = ({ logoSrc }) => {
   return (
-    <div className="page-padding my-bg-primary flex h-14 items-center justify-between">
+    <div className="horizontal-page-padding my-bg-primary fixed z-50 flex h-14 w-full items-center justify-between">
       <Link to={`/`}>
         <img className="h-10" src={logoSrc} alt="" />
       </Link>

@@ -9,23 +9,24 @@ const NavbarMobile = ({ logoSrc }) => {
     setiIsSideMenuOn((prevState) => !prevState);
   };
   return (
-    <div className="page-padding my-bg-primary flex h-14 items-center justify-between">
-      <Link to={`/`}>
-        <img className="h-10" src={logoSrc} alt="" />
-      </Link>
-      <button
-        onClick={handleOnClick}
-        className="my-bg-secondary px-3 py-1 text-xl text-black "
-      >
-        {isSideMenuOn ? (
-          <i className="fa-solid fa-xmark"></i>
-        ) : (
-          <i className="fa-solid fa-bars"></i>
-        )}
-
-        {isSideMenuOn && <SideMenu />}
-      </button>
-    </div>
+    <>
+      <div className="horizontal-page-padding my-bg-primary fixed z-50 flex h-14 w-full items-center justify-between">
+        <Link to={`/`}>
+          <img className="h-10" src={logoSrc} alt="" />
+        </Link>
+        <button
+          onClick={handleOnClick}
+          className="my-bg-secondary px-3 py-1 text-xl text-black "
+        >
+          {isSideMenuOn ? (
+            <i className="fa-solid fa-xmark"></i>
+          ) : (
+            <i className="fa-solid fa-bars"></i>
+          )}
+        </button>
+      </div>
+      {isSideMenuOn && <SideMenu />}
+    </>
   );
 };
 

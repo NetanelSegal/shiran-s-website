@@ -92,7 +92,7 @@ button {
   @apply my-bg-primary;
 }
 
-.page-padding {
+.horizontal-page-padding {
   @apply overflow-x-hidden px-5 md:px-24 lg:px-40 xl:px-[18%];
 }
 
