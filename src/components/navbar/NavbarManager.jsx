@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logoSrc from "../../assets/shiran_logo.svg";
 import NavbarDesktop from "./NavbarDesktop";
 import NavbarMobile from "./NavbarMobile";
@@ -10,13 +10,12 @@ const NavbarManager = () => {
   function handleWindowSizeChange() {
     setScreenWidth(window.innerWidth);
   }
-
   useEffect(() => {
     window.addEventListener("resize", handleWindowSizeChange);
     return () => {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
-  }, []);
+  }, []); // empty dependency array means this effect runs once on mount and cleans up on unmount
 
   return (
     <>

@@ -55,7 +55,7 @@ span {
 }
 button {
   @apply rounded-xl
-  px-6 py-2 font-bold text-white;
+  bg-slate-500 px-6 py-2 font-bold text-white;
 }
 
 .btn-effect {
@@ -105,5 +105,5 @@ button {
 }
 
 .section {
-  @apply py-10 sm:py-20;
+  @apply py-10 sm:py-20 md:py-24 lg:py-32;
 }

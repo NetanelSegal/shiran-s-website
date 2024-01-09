@@ -17,7 +17,7 @@ const ProjectsSection = () => {
       initial="from"
       variants={enterAnimationVariants}
       viewport={{ once: true }}
-      className="horizontal-page-padding section h-dvh overflow-hidden"
+      className="horizontal-page-padding section overflow-hidden"
     >
       <div className="mb-5 items-end gap-2">
         <h2 className="font-bold">בונה חלומות</h2>

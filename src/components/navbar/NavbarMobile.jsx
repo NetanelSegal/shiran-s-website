@@ -9,8 +9,15 @@ const NavbarMobile = ({ logoSrc }) => {
     setiIsSideMenuOn((prevState) => !prevState);
   };
   return (
-    <>
-      <div className="horizontal-page-padding my-bg-primary fixed z-50 flex h-14 w-full items-center justify-between">
+    <div
+      onClick={() => {
+        if (isSideMenuOn) {
+          setiIsSideMenuOn(false);
+        }
+      }}
+      className="fixed left-0 right-0 z-50"
+    >
+      <div className="horizontal-page-padding my-bg-primary  flex h-14 w-full items-center justify-between">
         <Link to={`/`}>
           <img className="h-10" src={logoSrc} alt="" />
         </Link>
@@ -26,7 +33,7 @@ const NavbarMobile = ({ logoSrc }) => {
         </button>
       </div>
       {isSideMenuOn && <SideMenu />}
-    </>
+    </div>
   );
 };
 

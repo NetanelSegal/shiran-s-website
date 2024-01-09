@@ -50,8 +50,8 @@ const SelectedProjectsCarousel = () => {
 
   return (
     <>
+      {/* images */}
       <div className="relative mb-1 aspect-video w-full">
-        {/* images */}
         {selectedProjData.map((data, i) => (
           <motion.div
             key={i}
@@ -87,7 +87,6 @@ const SelectedProjectsCarousel = () => {
         <div className="my-bg-primary w-full grow flex-row rounded-xl py-1 pl-4 pr-4 text-white sm:w-auto">
           <h5>{selectedProjData[selectedIndexMiddle].title}</h5>
         </div>
-
         <div className="flex flex-nowrap ">
           <button
             onClick={handleLeftOnCLick}
@@ -103,17 +102,3 @@ const SelectedProjectsCarousel = () => {
 };
 
 export default SelectedProjectsCarousel;
-
-// const handleRightOnCLick = () => {
-//   setSelectedIndexMiddle((prevState) =>
-//     prevState == 0 ? selectedProjData.length - 1 : prevState - 1,
-//   );
-// };
-{
-  /* <button
-            onClick={handleRightOnCLick}
-            className="my-btn-primary btn-effect ml-1"
-          >
-            <i className="fa-solid fa-arrow-right"></i>
-          </button> */
-}
