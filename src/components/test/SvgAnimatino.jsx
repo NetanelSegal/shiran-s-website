@@ -2,9 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import PathBetweenPoints from "./processSectionVector/PathBetweenPoints";
 
 const MyComponent = () => {
+  const [trigger, setTrigger] = useState(false);
   const buttonRef1 = useRef(null);
   const buttonRef2 = useRef(null);
   const containerRef = useRef(null);
+
+  const handleClick = () => {
+    setTrigger(!trigger);
+  };
 
   const [path1Pos, setPath1Pos] = useState({
     start: null,
@@ -32,6 +37,7 @@ const MyComponent = () => {
         <PathBetweenPoints
           startPoint={path1Pos.start}
           endPoint={path1Pos.end}
+          trigger
         />
       )}
 
@@ -39,18 +45,14 @@ const MyComponent = () => {
         <button
           className="absolute left-5 top-2"
           ref={buttonRef1}
-          onClick={() => {
-            console.log("click");
-          }}
+          onClick={handleClick}
         >
           Next Step
         </button>
         <button
           className="absolute right-14 top-2/3"
           ref={buttonRef2}
-          onClick={() => {
-            console.log("click");
-          }}
+          onClick={handleClick}
         >
           Next Step
         </button>

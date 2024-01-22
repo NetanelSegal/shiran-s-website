@@ -2,7 +2,6 @@ import HeroSection from "./sections/HeroSection";
 import HelloSection from "./sections/HelloSection";
 import ProjectsSection from "./sections/ProjectsSection";
 import ProcessSection from "./sections/ProcessSection";
-import AnimatedSVG from "../../components/test/SvgAnimatino";
 
 const Home = () => {
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import src1 from "../../assets/selectedProjectsImages/1.jpg";
 import src2 from "../../assets/selectedProjectsImages/2.jpg";
 import src3 from "../../assets/selectedProjectsImages/3.jpg";
@@ -35,18 +35,50 @@ const SelectedProjectsCarousel = () => {
     },
   ];
 
-  const handleLeftOnCLick = () => {
-    setSelectedIndexMiddle((prevState) =>
-      prevState == selectedProjData.length - 1 ? 0 : prevState + 1,
-    );
+  const variants = {
+    right: {
+      scale: 0.9,
+      x: "98%",
+      zIndex: 0,
+      filter: "blur(5px)",
+      opacity: 1,
+    },
+    middle: { scale: 1, x: "0", zIndex: 5, filter: "blur(0px)", opacity: 1 },
+    left: {
+      scale: 0.9,
+      x: "-98%",
+      zIndex: -5,
+      filter: "blur(5px)",
+      opacity: 1,
+    },
+    hidden: {
+      scale: 0.9,
+      opacity: 0,
+      zIndex: -10,
+      x: "200%",
+      filter: "blur(5px)",
+    },
   };
 
-  const variants = {
-    right: { scale: 0.9, x: "98%", zIndex: -5, filter: "blur(5px)" },
-    middle: { scale: 1, x: "0", zIndex: 0, filter: "none" },
-    left: { scale: 0.9, x: "-98%", zIndex: -10, filter: "blur(5px)" },
-    hidden: { opacity: 0, x: "200%", scale: 0.9 },
+  const initialVariants = ["left", "middle", "right", "hidden"];
+
+  const [variantsState, setVariantsState] = useState(initialVariants);
+
+  const handleLeftOnCLick = () => {
+    setSelectedIndexMiddle((prevState) =>
+      prevState == 0 ? selectedProjData.length - 1 : prevState - 1,
+    );
+
+    setVariantsState((prev) => {
+      const shiftedElement = prev.shift(); // Remove the first element
+      prev.push(shiftedElement); // Add it to the end
+      return [...prev]; // Create a new array to trigger the state update
+    });
   };
+
+  useEffect(() => {
+    console.log(variantsState);
+  }, [variantsState]);
 
   return (
     <>
@@ -56,17 +88,8 @@ const SelectedProjectsCarousel = () => {
           <motion.div
             key={i}
             variants={variants}
-            whileInView={
-              (selectedIndexMiddle == 0
-                ? i == selectedProjData.length - 1 && "right"
-                : i == selectedIndexMiddle - 1 && "right") ||
-              (i == selectedIndexMiddle && "middle") ||
-              (selectedIndexMiddle == selectedProjData.length - 1
-                ? i == 0 && "left"
-                : i == selectedIndexMiddle + 1 && "left") ||
-              "hidden"
-            }
-            viewport={{ once: true }}
+            initial={initialVariants[i]}
+            animate={variantsState[i]}
             transition={{
               duration: 1,
               ease: "easeInOut",
@@ -74,7 +97,7 @@ const SelectedProjectsCarousel = () => {
             className="absolute top-0 aspect-video overflow-hidden rounded-xl"
           >
             <img
-              className="cursor-pointer transition-all duration-200 ease-in-out hover:scale-125"
+              className="cursor-pointer transition-all duration-300 ease-in-out hover:scale-125"
               src={data.img}
               alt=""
               key={i}
@@ -102,3 +125,18 @@ const SelectedProjectsCarousel = () => {
 };
 
 export default SelectedProjectsCarousel;
+
+const getCurrentPosition = (selectedIndexMiddle, selectedProjData, i) => {
+  if (selectedIndexMiddle == 0) {
+  }
+  return (
+    (selectedIndexMiddle == 0
+      ? i == selectedProjData.length - 1 && "right"
+      : i == selectedIndexMiddle - 1 && "right") ||
+    (i == selectedIndexMiddle && "middle") ||
+    (selectedIndexMiddle == selectedProjData.length - 1
+      ? i == 0 && "left"
+      : i == selectedIndexMiddle + 1 && "left") ||
+    "hidden"
+  );
+};

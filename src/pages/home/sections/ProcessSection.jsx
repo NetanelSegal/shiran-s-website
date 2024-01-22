@@ -1,80 +1,148 @@
-import { motion } from "framer-motion";
-import SvgAnimatino from "../../../components/test/SvgAnimatino";
+import { motion, useInView } from "framer-motion";
+// import SvgAnimatino from "../../../components/test/SvgAnimatino";
+import { useEffect, useRef, useState } from "react";
+import PathBetweenPoints from "../../../components/test/processSectionVector/PathBetweenPoints";
+import { mainHeading, content as pageContent } from "./processSectionContent";
+import svgSrc1 from "../../../assets/images/1.png";
+import svgSrc2 from "../../../assets/images/2.png";
+import svgSrc3 from "../../../assets/images/3.png";
+import svgSrc4 from "../../../assets/images/4.png";
+import svgSrc5 from "../../../assets/images/5.png";
+import SvgShape from "../../../components/theProcess/SvgShape";
+
+const srcs = [svgSrc1, svgSrc2, svgSrc3, svgSrc4, svgSrc5];
 
 const ProcessSection = () => {
   const enterAnimationVariants = {
-    from: { opacity: 0, y: 300 },
+    from: { opacity: 0, y: 100 },
     to: {
       opacity: 1,
       y: 0,
-      transition: { duration: 1, ease: "easeInOut" },
+      transition: { duration: 0.8, ease: "easeInOut" },
     },
   };
 
+  const svgContainerRef = useRef([]);
+  const sectionRef = useRef(null);
+
+  const [pathsPositions, setPathsPositions] = useState([]);
+
+  useEffect(() => {
+    if (svgContainerRef.current.length === 5) {
+      const positions = [];
+      svgContainerRef.current.forEach((e, i) => {
+        if (i < svgContainerRef.current.length - 1) {
+          const startPoint = getCenterOfElementInContainer(
+            svgContainerRef.current[i],
+            sectionRef.current,
+          );
+          // Adjust this logic based on your requirements
+          const endPoint = getCenterOfElementInContainer(
+            svgContainerRef.current[i + 1],
+            sectionRef.current,
+          );
+          positions.push({ start: startPoint, end: endPoint });
+        }
+      });
+      setPathsPositions(positions);
+    }
+  }, [svgContainerRef]);
+
+  const [areInView, setAreInView] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+
   return (
-    <motion.section
-      whileInView="to"
-      initial="from"
-      variants={enterAnimationVariants}
-      viewport={{ once: true }}
-      className="horizontal-page-padding section overflow-hidden"
+    <section
+      ref={sectionRef}
+      className="horizontal-page-padding section relative mb-32 overflow-hidden"
     >
-      <div className="mb-5 text-center">
-        <h2 className="font-bold">קצת מהתהליך איתי</h2>
-      </div>
-      {/* step 1 */}
-      <div className="my-16">
-        <div className="relative w-96 max-w-[50%]">
-          <h4 className="font-semibold">שיחת היכרות</h4>
-          <p>לשם הבנת צרכי הלקוח והסקת מסקנות בהתאם לפרוייקט</p>
-          <div className="absolute left-1/4 top-3/4 h-7 w-7 bg-black"></div>
-        </div>
-      </div>
-      {/* step 2 */}
-      <div className="my-16">
-        <div className="relative mr-auto w-96 max-w-[50%]">
-          <h4 className="font-semibold">תיק מידע </h4>
-          <p>מכיל מידע תכנוני, הנדסי ומרחבי מפורט וחומרי עזר נוספים</p>
-          <div className="absolute -right-3 top-2/4 h-7 w-7 bg-black"></div>
-        </div>
-      </div>
-      {/* step 3 */}
-      <div className="my-16">
-        <div className="relative w-96 max-w-[50%]">
-          <h4 className="font-semibold">תכנון המבנה והכנת הדמייה</h4>
-          <p>
-            זהו תהליך מורכב בו בודקים האם וכיצד ניתן לבנות או לשפץ את המבנה
-            שלכם. התהליך מתחיל בבדיקת אישורי הבנייה ומסתיים בתוכנית אדריכלית
-            מקיפה הכוללת שרטוטים ולעיתים גם הדמיות.
-          </p>
-          <div className="absolute left-0 top-1/2 h-7 w-7 bg-black"></div>
-        </div>
-      </div>
-      {/* step 4 */}
-      <div className="my-16">
-        <div className="relative mr-auto w-96 max-w-[50%]">
-          <h4 className="font-semibold">העברה לוועדה</h4>
-          <p>
-            הוועדה בודקת אם כל המסמכים הוגשו כראוי מדובר על בדיקה טכנית, כאשר אם
-            יש חוסרים/ השלמות וכו', הבקשה חוזרת למגישים להשלמות/ תוספות.
-          </p>
-          <div className="absolute -right-3 top-3/4 h-7 w-7 bg-black"></div>
-        </div>
-      </div>
-      {/* step 5 */}
-      <div className="my-16">
-        <div className="relative w-96 max-w-[50%]">
-          <h4 className="font-semibold">בנייה</h4>
-          <p>
-            בשלב הזה יש לנו את כל מה שצריך כדי להתחיל לבנות ומה שנשאר זה לתת
-            לבעלי מקצוע לעשות את עבודתם
-          </p>
-          <div className="absolute left-0 top-3/4 h-7 w-7 bg-black"></div>
-        </div>
-      </div>
-      <SvgAnimatino />
-    </motion.section>
+      <motion.div
+        whileInView="to"
+        initial="from"
+        variants={enterAnimationVariants}
+        viewport={{ once: true }}
+        className="mb-5 text-center"
+      >
+        <h2 className="font-bold">{mainHeading}</h2>
+      </motion.div>
+      {pageContent.map((eContent, i) => (
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: "backIn" }}
+          viewport={{ once: true }}
+          key={eContent.heading}
+          className={"my-16 " + i == pageContent.length - 1 ? "mb-0" : ""}
+        >
+          <div
+            className={
+              i % 2 == 1
+                ? "relative mr-auto w-96 max-w-[50%]"
+                : "relative w-96 max-w-[50%]"
+            }
+          >
+            <h4 className="font-semibold">{eContent.heading}</h4>
+            <p>{eContent.text}</p>
+            {i == pageContent.length - 1 && (
+              <button className="my-btn-secondary btn-effect my-2">
+                עוד על התהליך
+              </button>
+            )}
+            <div
+              ref={(e) => (svgContainerRef.current[i] = e)}
+              className={
+                i == 3
+                  ? "absolute -right-7 top-full -z-20 h-7 w-9"
+                  : i % 2 == 1
+                    ? "absolute -right-7 top-full -z-20 h-7 w-7"
+                    : "absolute -left-7 top-full -z-20 h-7 w-7"
+              }
+            >
+              <SvgShape
+                areInView={areInView}
+                setAreInView={setAreInView}
+                src={srcs[i]}
+                key={srcs[i]}
+                i={i}
+              />
+            </div>
+          </div>
+        </motion.div>
+      ))}
+      <div className="text-center"></div>
+      <svg
+        className="absolute inset-0 -z-30"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="xMidYMax meet"
+      >
+        {pathsPositions[0] &&
+          pathsPositions.map((e, i) => (
+            <PathBetweenPoints
+              i={i}
+              key={i + e.start}
+              startPoint={e.start}
+              endPoint={e.end}
+              trigger={areInView[i] && true}
+            />
+          ))}
+      </svg>
+    </section>
   );
 };
 
 export default ProcessSection;
+
+const getCenterOfElementInContainer = (elem, container) => {
+  const rect = elem.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+
+  const centerX = rect.left - containerRect.left + rect.width / 2;
+  const centerY = rect.top - containerRect.top + rect.height / 2;
+  return { x: centerX, y: centerY };
+};

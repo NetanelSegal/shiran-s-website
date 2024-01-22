@@ -3,11 +3,10 @@ import SelectedProjectsCarousel from "../../../components/selectedProjectsCarous
 
 const ProjectsSection = () => {
   const enterAnimationVariants = {
-    from: { opacity: 0, y: 300 },
+    from: { opacity: 0 },
     to: {
       opacity: 1,
-      y: 0,
-      transition: { duration: 1, ease: "easeInOut" },
+      transition: { duration: 0.8, ease: "easeInOut" },
     },
   };
 
