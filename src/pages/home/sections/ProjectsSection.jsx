@@ -6,7 +6,7 @@ const ProjectsSection = () => {
     from: { opacity: 0 },
     to: {
       opacity: 1,
-      transition: { duration: 0.8, ease: "easeInOut" },
+      transition: { duration: 1.2, ease: "easeInOut" },
     },
   };
 

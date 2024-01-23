@@ -81,15 +81,17 @@ const ProcessSection = () => {
         >
           <div
             className={
-              i % 2 == 1
-                ? "relative mr-auto w-96 max-w-[50%]"
-                : "relative w-96 max-w-[50%]"
+              i == 0
+                ? "relative mb-28 w-96 max-w-[50%]"
+                : i % 2 == 1
+                  ? "relative my-28 mr-auto w-96 max-w-[50%]"
+                  : "relative my-28 w-96 max-w-[50%]"
             }
           >
             <h4 className="font-semibold">{eContent.heading}</h4>
             <p>{eContent.text}</p>
             {i == pageContent.length - 1 && (
-              <button className="my-btn-secondary btn-effect my-2">
+              <button className="my-btn-primary btn-effect my-2">
                 עוד על התהליך
               </button>
             )}
@@ -97,10 +99,10 @@ const ProcessSection = () => {
               ref={(e) => (svgContainerRef.current[i] = e)}
               className={
                 i == 3
-                  ? "absolute -right-7 top-full -z-20 h-7 w-9"
+                  ? "absolute -right-10 -z-20 h-7 w-9 "
                   : i % 2 == 1
-                    ? "absolute -right-7 top-full -z-20 h-7 w-7"
-                    : "absolute -left-7 top-full -z-20 h-7 w-7"
+                    ? "absolute -right-10 top-1/2 -z-20 h-7 w-7 "
+                    : "absolute right-full top-1/2 -z-20 h-7 w-7 "
               }
             >
               <SvgShape

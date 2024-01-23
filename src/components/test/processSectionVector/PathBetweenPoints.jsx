@@ -1,23 +1,29 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
-
-const seconderyColor = getComputedStyle(
-  document.documentElement,
-).getPropertyValue("--secondary-light-color");
-
-const primaryColor = getComputedStyle(
-  document.documentElement,
-).getPropertyValue("--primary-dark-color");
+import { motion } from "framer-motion";
 
 const PathBetweenPoints = ({ startPoint, endPoint, trigger, i }) => {
+  // const seconderyColor = getComputedStyle(
+  //   document.documentElement,
+  // ).getPropertyValue("--secondary-light-color");
+
+  // const primaryColor = getComputedStyle(
+  //   document.documentElement,
+  // ).getPropertyValue("--primary-dark-color");
+
+  const seconderyColor = "white";
+
+  const primaryColor = getComputedStyle(
+    document.documentElement,
+  ).getPropertyValue("--secondary-light-color");
+
   const pathRef = useRef(null);
   const [pathLength, setPathLength] = useState(0);
 
   const { x: startX, y: startY } = startPoint;
   const { x: endX, y: endY } = endPoint;
 
-  const controlPoint1 = { x: startX + 0, y: startY + 100 };
-  const controlPoint2 = { x: endX + 0, y: endY - 100 };
+  const controlPoint1 = { x: startX + 0, y: startY + 60 };
+  const controlPoint2 = { x: endX + 0, y: endY - 60 };
 
   const pathData = `M${startX} ${startY} C${controlPoint1.x} ${controlPoint1.y}, ${controlPoint2.x} ${controlPoint2.y}, ${endX} ${endY}`;
 
@@ -50,7 +56,7 @@ const PathBetweenPoints = ({ startPoint, endPoint, trigger, i }) => {
       <path
         ref={pathRef}
         d={pathData}
-        stroke={`${seconderyColor || "#ccbebc"}`}
+        stroke={`${seconderyColor}`}
         strokeWidth="3"
         strokeDasharray="20"
         fill="none"
@@ -58,7 +64,7 @@ const PathBetweenPoints = ({ startPoint, endPoint, trigger, i }) => {
       />
       <path
         d={pathData}
-        stroke={`${primaryColor || "#002b49"}`}
+        stroke={`${primaryColor}`}
         strokeWidth="3"
         strokeDasharray="20"
         fill="none"
