@@ -5,8 +5,7 @@ const SvgShape = ({ src, i, setAreInView, areInView }) => {
   const shapeRef = useRef(null);
 
   const isInView = useInView(shapeRef, {
-    margin: "200px 0px -400px 0px",
-    // once: true,
+    margin: "500px 0px -400px 0px",
   });
 
   useEffect(() => {

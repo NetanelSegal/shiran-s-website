@@ -1,7 +1,6 @@
-import { motion, useInView } from "framer-motion";
-// import SvgAnimatino from "../../../components/test/SvgAnimatino";
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import PathBetweenPoints from "../../../components/test/processSectionVector/PathBetweenPoints";
+import AnimatedProcessPath from "../../../components/theProcess/AnimatedProcessPath";
 import { mainHeading, content as pageContent } from "./processSectionContent";
 import svgSrc1 from "../../../assets/images/1.png";
 import svgSrc2 from "../../../assets/images/2.png";
@@ -59,7 +58,7 @@ const ProcessSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="horizontal-page-padding section relative mb-32 overflow-hidden"
+      className="horizontal-page-padding section relative overflow-hidden"
     >
       <motion.div
         whileInView="to"
@@ -98,10 +97,12 @@ const ProcessSection = () => {
             <div
               ref={(e) => (svgContainerRef.current[i] = e)}
               className={
-                i == 3
-                  ? "absolute -right-10 -z-20 h-7 w-9 "
-                  : i % 2 == 1
-                    ? "absolute -right-10 top-1/2 -z-20 h-7 w-7 "
+                i % 2 == 1
+                  ? i == 3
+                    ? "absolute -right-10 top-1/2 -z-20 h-7 w-9 "
+                    : "absolute -right-10 top-1/2 -z-20 h-7 w-7 "
+                  : i == 4
+                    ? "absolute right-full top-1/3 -z-20 h-7 w-7 "
                     : "absolute right-full top-1/2 -z-20 h-7 w-7 "
               }
             >
@@ -125,7 +126,7 @@ const ProcessSection = () => {
       >
         {pathsPositions[0] &&
           pathsPositions.map((e, i) => (
-            <PathBetweenPoints
+            <AnimatedProcessPath
               i={i}
               key={i + e.start}
               startPoint={e.start}

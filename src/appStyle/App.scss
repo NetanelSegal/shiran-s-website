@@ -48,7 +48,9 @@ h5 {
 h6 {
   @apply text-xl;
 }
-
+a {
+  @apply font-semibold hover:font-bold hover:underline active:font-bold;
+}
 p,
 span {
   @apply text-base;
@@ -105,5 +107,5 @@ button {
 }
 
 .section {
-  @apply py-10 sm:py-20 md:py-24 lg:py-32;
+  @apply my-20 py-10 sm:py-20 md:py-24 lg:py-32;
 }

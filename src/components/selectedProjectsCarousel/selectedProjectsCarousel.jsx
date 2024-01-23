@@ -76,10 +76,6 @@ const SelectedProjectsCarousel = () => {
     });
   };
 
-  useEffect(() => {
-    console.log(variantsState);
-  }, [variantsState]);
-
   return (
     <>
       {/* images */}
