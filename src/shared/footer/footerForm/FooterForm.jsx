@@ -1,12 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { joiResolver } from "@hookform/resolvers/joi";
-import Joi from "joi";
 import { motion } from "framer-motion";
-
-const seconderyColor = getComputedStyle(
-  document.documentElement,
-).getPropertyValue("--secondary-light-color");
 
 const FooterForm = () => {
   const feilds = ["name", "phoneNumber", "email"];
@@ -29,9 +23,7 @@ const FooterForm = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
-    // resolver: joiResolver(joiSchema),
-  });
+  } = useForm({});
 
   const watchedData = useWatch({ control });
 
@@ -64,8 +56,7 @@ const FooterForm = () => {
 
   return (
     <form
-      className="justify-evenly gap-2 md:flex md:grow
-    "
+      className="justify-evenly gap-2 md:flex md:grow"
       id="form"
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -131,31 +122,5 @@ const FooterForm = () => {
     </form>
   );
 };
-
-// const joiSchema = Joi.object({
-//   email: Joi.string()
-//     .email({ tlds: { allow: false } })
-//     .required()
-//     .messages({
-//       "string.base": "Email must be a string",
-//       "string.empty": "Email is required",
-//       "string.email": "Invalid email format",
-//       "any.required": "Email is required",
-//     }),
-//   password: Joi.string()
-//     .min(6)
-//     .max(16)
-//     .pattern(/^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,20}$/)
-//     .required()
-//     .messages({
-//       "string.base": "Password must be a string",
-//       "string.empty": "Password is required",
-//       "string.min": "Password must be at least {#limit} characters",
-//       "string.max": "Password cannot exceed {#limit} characters",
-//       "any.required": "Password is required",
-//       "string.pattern.base":
-//         "Password must include at least one lowercase letter, one uppercase letter, one digit, and one special character @$!%*?&",
-//     }),
-// });
 
 export default FooterForm;

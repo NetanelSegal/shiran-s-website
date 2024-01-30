@@ -1,4 +1,4 @@
-import FooterForm from "./footerForm/footerForm";
+import FooterForm from "./footerForm/FooterForm";
 import srcIconTel from "../../assets/icons/tel.svg";
 import srcIconMail from "../../assets/icons/mail.svg";
 import srcIconFacebook from "../../assets/icons/facebook.svg";
@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
-import { Outlet } from "react-router-dom";
 
 const Footer = () => {
   const { user } = useContext(UserContext);
