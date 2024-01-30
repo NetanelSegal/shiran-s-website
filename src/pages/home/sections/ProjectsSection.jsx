@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import SelectedProjectsCarousel from "../../../components/selectedProjectsCarousel/SelectedProjectsCarousel";
+import SelectedProjectsCarousel from "../../../components/selectedProjectsCarousel/selectedProjectsCarousel";
 import { selectedProjData } from "./content/projectsSectionContent";
 
 const ProjectsSection = () => {

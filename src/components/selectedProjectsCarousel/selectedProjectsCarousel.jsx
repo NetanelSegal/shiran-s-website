@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from "react";
-// import src1 from "../../assets/selectedProjectsImages/1.jpg";
-// import src2 from "../../assets/selectedProjectsImages/2.jpg";
-// import src3 from "../../assets/selectedProjectsImages/3.jpg";
-// import src4 from "../../assets/selectedProjectsImages/4.jpg";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const SelectedProjectsCarousel = ({ projectsData }) => {
@@ -49,7 +45,6 @@ const SelectedProjectsCarousel = ({ projectsData }) => {
     });
   };
 
-  
   return (
     <motion.div
       initial={{ opacity: 0, y: 200 }}
@@ -100,16 +95,3 @@ const SelectedProjectsCarousel = ({ projectsData }) => {
 };
 
 export default SelectedProjectsCarousel;
-
-// const getCurrentPosition = (currMiddle, selectedProjData, i) => {
-//   return (
-//     (currMiddle == 0
-//       ? i == selectedProjData.length - 1 && "right"
-//       : i == currMiddle - 1 && "right") ||
-//     (i == currMiddle && "middle") ||
-//     (currMiddle == selectedProjData.length - 1
-//       ? i == 0 && "left"
-//       : i == currMiddle + 1 && "left") ||
-//     "hidden"
-//   );
-// };
