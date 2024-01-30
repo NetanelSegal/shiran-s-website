@@ -3,7 +3,7 @@ import "./style/Navbar.css";
 import SideMenu from "./sideMenu/SideMenu";
 import { Link } from "react-router-dom";
 
-const NavbarMobile = ({ logoSrc }) => {
+const NavbarMobile = ({ logoSrc, navLinks }) => {
   const [isSideMenuOn, setiIsSideMenuOn] = useState(false);
   const handleOnClick = () => {
     setiIsSideMenuOn((prevState) => !prevState);
@@ -32,7 +32,7 @@ const NavbarMobile = ({ logoSrc }) => {
           )}
         </button>
       </div>
-      {isSideMenuOn && <SideMenu />}
+      {isSideMenuOn && <SideMenu navLinks={navLinks} />}
     </div>
   );
 };

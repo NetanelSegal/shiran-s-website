@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import SelectedProjectsCarousel from "../../../components/selectedProjectsCarousel/SelectedProjectsCarousel";
+import { selectedProjData } from "./content/projectsSectionContent";
 
 const ProjectsSection = () => {
   const enterAnimationVariants = {
     from: { opacity: 0 },
     to: {
       opacity: 1,
-      transition: { duration: 1.2, ease: "easeInOut" },
+      transition: { duration: 0.8, ease: "easeInOut" },
     },
   };
 
@@ -23,7 +24,7 @@ const ProjectsSection = () => {
         <h5>הפרוייקטים מנצחים שלי</h5>
       </div>
 
-      <SelectedProjectsCarousel />
+      <SelectedProjectsCarousel projectsData={selectedProjData} />
     </motion.section>
   );
 };

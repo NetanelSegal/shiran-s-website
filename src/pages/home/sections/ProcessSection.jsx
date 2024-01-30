@@ -1,17 +1,20 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import AnimatedProcessPath from "../../../components/theProcess/AnimatedProcessPath";
-import { mainHeading, content as pageContent } from "./processSectionContent";
+import { mainHeading, content as pageContent } from "./content/processSectionContent";
 import svgSrc1 from "../../../assets/images/1.png";
 import svgSrc2 from "../../../assets/images/2.png";
 import svgSrc3 from "../../../assets/images/3.png";
 import svgSrc4 from "../../../assets/images/4.png";
 import svgSrc5 from "../../../assets/images/5.png";
 import SvgShape from "../../../components/theProcess/SvgShape";
+import { AppContext } from "../../../context/AppContext";
 
 const srcs = [svgSrc1, svgSrc2, svgSrc3, svgSrc4, svgSrc5];
 
 const ProcessSection = () => {
+  const { screenWidth } = useContext(AppContext);
+
   const enterAnimationVariants = {
     from: { opacity: 0, y: 100 },
     to: {
@@ -45,7 +48,7 @@ const ProcessSection = () => {
       });
       setPathsPositions(positions);
     }
-  }, [svgContainerRef]);
+  }, [svgContainerRef, screenWidth]);
 
   const [areInView, setAreInView] = useState([
     false,

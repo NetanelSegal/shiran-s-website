@@ -2,18 +2,17 @@ import HeroSection from "./sections/HeroSection";
 import HelloSection from "./sections/HelloSection";
 import ProjectsSection from "./sections/ProjectsSection";
 import ProcessSection from "./sections/ProcessSection";
-import Footer from "../../components/footer/Footer";
+import Footer from "../../shared/footer/Footer";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div>
       <HeroSection />
       <HelloSection />
       <ProjectsSection />
       <ProcessSection />
-      <Footer />
     </div>
   );
 };
 
-export default Home;
+export default HomePage;

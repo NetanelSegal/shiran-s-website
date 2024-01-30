@@ -16,7 +16,7 @@ const HeroSection = () => {
         variants={variants}
         initial="initial"
         animate="animate"
-        className="h-[70dvh] max-h-dvh min-w-full object-cover sm:aspect-video sm:w-full lg:h-full"
+        className="h-[70dvh] max-h-dvh min-h-[700px] min-w-full object-cover sm:aspect-video sm:w-full lg:h-full"
         src={heroVideoSrc}
         autoPlay
         loop

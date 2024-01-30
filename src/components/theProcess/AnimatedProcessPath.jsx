@@ -1,14 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { AppContext } from "../../context/AppContext";
+
+// const seconderyColor = getComputedStyle(
+//   document.documentElement,
+// ).getPropertyValue("--secondary-light-color");
+
+// const primaryColor = getComputedStyle(
+//   document.documentElement,
+// ).getPropertyValue("--primary-dark-color");
 
 const AnimatedProcessPath = ({ startPoint, endPoint, trigger, i }) => {
-  // const seconderyColor = getComputedStyle(
-  //   document.documentElement,
-  // ).getPropertyValue("--secondary-light-color");
-
-  // const primaryColor = getComputedStyle(
-  //   document.documentElement,
-  // ).getPropertyValue("--primary-dark-color");
+  const { screenWidth } = useContext(AppContext);
 
   const seconderyColor = "white";
 
@@ -25,13 +28,16 @@ const AnimatedProcessPath = ({ startPoint, endPoint, trigger, i }) => {
   const controlPoint1 = { x: startX + 0, y: startY + 60 };
   const controlPoint2 = { x: endX + 0, y: endY - 60 };
 
-  const pathData = `M${startX} ${startY} C${controlPoint1.x} ${controlPoint1.y}, ${controlPoint2.x} ${controlPoint2.y}, ${endX} ${endY}`;
-
+  const initialPathData = `M${startX} ${startY} C${controlPoint1.x} ${controlPoint1.y}, ${controlPoint2.x} ${controlPoint2.y}, ${endX} ${endY}`;
+  const [pathData, setPathData] = useState(initialPathData);
   useEffect(() => {
+    setPathData(
+      `M${startX} ${startY} C${controlPoint1.x} ${controlPoint1.y}, ${controlPoint2.x} ${controlPoint2.y}, ${endX} ${endY}`,
+    );
     if (pathRef.current) {
       setPathLength(pathRef.current.getTotalLength());
     }
-  }, [pathRef]);
+  }, [pathRef, screenWidth, pathData]);
 
   return (
     <>
