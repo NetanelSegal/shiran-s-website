@@ -59,24 +59,19 @@ const Footer = () => {
     viewport: { once: true },
   };
   return (
-    <footer className="horizontal-page-padding my-bg-primary overflow-hidden py-20">
-      <motion.div
-        variants={variants}
-        initial="from"
-        whileInView="to"
-        className="mb-5 lg:flex"
-      >
+    <motion.footer
+      variants={variants}
+      initial="from"
+      whileInView="to"
+      className="horizontal-page-padding my-bg-primary overflow-hidden py-20"
+    >
+      <div className="mb-5 lg:flex">
         <h2 className="my-5 font-semibold text-white lg:my-0 lg:w-1/3">
           מתה שנעבוד ביחד
         </h2>
         <FooterForm />
-      </motion.div>
-      <motion.div
-        variants={variants}
-        initial="from"
-        whileInView="to"
-        className="flex flex-col lg:flex-row-reverse lg:items-end lg:justify-between"
-      >
+      </div>
+      <div className="flex flex-col lg:flex-row-reverse lg:items-end lg:justify-between">
         <div className="w-full justify-end gap-5 sm:flex sm:flex-row-reverse">
           <div className="mb-5 w-full">
             {shiransContactInfo.map((e) => (
@@ -113,8 +108,8 @@ const Footer = () => {
           src={srcShiranLogo}
           alt=""
         />
-      </motion.div>
-    </footer>
+      </div>
+    </motion.footer>
   );
 };
 

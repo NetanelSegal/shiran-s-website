@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { useContext, useEffect, useRef, useState } from "react";
 import AnimatedProcessPath from "../../../components/theProcess/AnimatedProcessPath";
-import { mainHeading, content as pageContent } from "./content/processSectionContent";
+import {
+  mainHeading,
+  content as pageContent,
+} from "./content/processSectionContent";
 import svgSrc1 from "../../../assets/images/1.png";
 import svgSrc2 from "../../../assets/images/2.png";
 import svgSrc3 from "../../../assets/images/3.png";
@@ -14,6 +17,7 @@ const srcs = [svgSrc1, svgSrc2, svgSrc3, svgSrc4, svgSrc5];
 
 const ProcessSection = () => {
   const { screenWidth } = useContext(AppContext);
+  const [isAnimationComplete, setIsAnimationComplete] = useState(false);
 
   const enterAnimationVariants = {
     from: { opacity: 0, y: 100 },
@@ -48,7 +52,7 @@ const ProcessSection = () => {
       });
       setPathsPositions(positions);
     }
-  }, [svgContainerRef, screenWidth]);
+  }, [svgContainerRef, screenWidth, isAnimationComplete]);
 
   const [areInView, setAreInView] = useState([
     false,
@@ -61,13 +65,14 @@ const ProcessSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="horizontal-page-padding section relative overflow-hidden"
+      className="horizontal-page-padding  relative overflow-hidden"
     >
       <motion.div
         whileInView="to"
         initial="from"
         variants={enterAnimationVariants}
         viewport={{ once: true }}
+        onAnimationComplete={() => setIsAnimationComplete(true)}
         className="mb-5 text-center"
       >
         <h2 className="font-bold">{mainHeading}</h2>

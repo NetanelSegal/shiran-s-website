@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useDrag } from "react-use-gesture";
 
 const SelectedProjectsCarousel = ({ projectsData }) => {
   const [currMiddle, setCurrMiddle] = useState(1);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const variants = {
     right: {
@@ -34,16 +36,31 @@ const SelectedProjectsCarousel = ({ projectsData }) => {
   const [variantsState, setVariantsState] = useState(initialVariants);
 
   const handleLeftOnCLick = () => {
-    setCurrMiddle((prevState) =>
-      prevState == 0 ? projectsData.length - 1 : prevState - 1,
-    );
+    setIsAnimating(true);
+    if (!isAnimating) {
+      setCurrMiddle((prevState) =>
+        prevState === 0 ? projectsData.length - 1 : prevState - 1,
+      );
 
-    setVariantsState((prev) => {
-      const shiftedElement = prev.shift(); // Remove the first element
-      prev.push(shiftedElement); // Add it to the end
-      return [...prev]; // Create a new array to trigger the state update
-    });
+      setVariantsState((prev) => {
+        const shiftedElement = prev.shift();
+        prev.push(shiftedElement);
+        return [...prev];
+      });
+    }
   };
+
+  const bind = useDrag(
+    ({ movement }) => {
+      setIsAnimating(true);
+      if (movement[0] > 0 && !isAnimating) {
+        handleLeftOnCLick();
+      }
+    },
+    {
+      axis: "x",
+    },
+  );
 
   return (
     <motion.div
@@ -53,7 +70,7 @@ const SelectedProjectsCarousel = ({ projectsData }) => {
       viewport={{ once: true }}
     >
       {/* images */}
-      <div className="relative mb-1 aspect-video w-full">
+      <div {...bind()} className="relative mb-1 aspect-video w-full">
         {projectsData?.map((data, i) => (
           <motion.div
             key={i}
@@ -64,6 +81,7 @@ const SelectedProjectsCarousel = ({ projectsData }) => {
               duration: 1,
               ease: "easeInOut",
             }}
+            onAnimationComplete={() => setIsAnimating(false)}
             className="absolute top-0 aspect-video overflow-hidden rounded-xl"
           >
             <img
