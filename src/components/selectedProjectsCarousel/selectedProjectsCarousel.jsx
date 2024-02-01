@@ -14,7 +14,13 @@ const SelectedProjectsCarousel = ({ projectsData }) => {
       filter: "blur(5px)",
       opacity: 1,
     },
-    middle: { scale: 1, x: "0", zIndex: 5, filter: "blur(0px)", opacity: 1 },
+    middle: {
+      scale: 1,
+      x: "0",
+      zIndex: 5,
+      filter: "blur(0px)",
+      opacity: 1,
+    },
     left: {
       scale: 0.9,
       x: "-98%",
@@ -63,26 +69,21 @@ const SelectedProjectsCarousel = ({ projectsData }) => {
   );
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 200 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0, duration: 1.2, ease: "easeInOut" }}
-      viewport={{ once: true }}
-    >
+    <div>
       {/* images */}
       <div {...bind()} className="relative mb-1 aspect-video w-full">
         {projectsData?.map((data, i) => (
           <motion.div
             key={i}
             variants={variants}
-            initial={initialVariants[i]}
+            initial={{ opacity: 0 }}
             animate={variantsState[i]}
             transition={{
-              duration: 1,
+              duration: 0.8,
               ease: "easeInOut",
             }}
             onAnimationComplete={() => setIsAnimating(false)}
-            className="absolute top-0 aspect-video overflow-hidden rounded-xl"
+            className="absolute  top-0 aspect-video overflow-hidden rounded-xl"
           >
             <img
               className="cursor-pointer transition-all duration-300 ease-in-out hover:scale-125"
@@ -108,7 +109,7 @@ const SelectedProjectsCarousel = ({ projectsData }) => {
           <button className="my-btn-secondary btn-effect">עוד פרוייקטים</button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

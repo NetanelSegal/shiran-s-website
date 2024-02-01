@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import HelloSectionImage from "../../../components/helloSectionImage/HelloSectionImage";
 import { useRef } from "react";
 

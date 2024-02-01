@@ -1,30 +1,35 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Project = ({ data, i }) => {
   const varients = {
     fromRight: {
+      opacity: 0,
       scale: 1.2,
-      x: "-100%",
+      x: "-50%",
     },
     fromLeft: {
+      opacity: 0,
       scale: 1.2,
-      x: "100%",
+      x: "-50%",
     },
     to: {
+      opacity: 1,
       scale: 1,
       x: "0",
       transition: {
-        duration: 1,
-        ease: "easeOut",
-        staggerChildren: 0.05,
+        duration: 0.8,
+        ease: "easeInOut",
+        staggerChildren: 0.02,
       },
     },
   };
   const className =
     "lg:gap-3" +
-    (i == 0 ? " mt-10 " : " my-24 lg:my-36 ") +
+    (i == 0 ? " mt-10 " : " my-16 lg:my-20 ") +
     (i % 2 == 0 ? "lg:flex " : "lg:flex-row-reverse lg:flex ");
+
   return (
     <motion.div
       variants={varients}
@@ -68,7 +73,8 @@ const Project = ({ data, i }) => {
         </motion.div>
         <motion.p variants={varients}>
           <strong>תיאור הפרוייקט: </strong>
-          <br /> {data.description}
+          <br /> {data.description}{" "}
+          <Link className="font-semibold">עוד על הפרויקט</Link>
         </motion.p>
       </motion.div>
     </motion.div>

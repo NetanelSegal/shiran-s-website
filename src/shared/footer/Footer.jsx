@@ -32,37 +32,32 @@ const Footer = () => {
 
   const navLinksUser = [
     { path: "/", title: "בית" },
-    { path: "/projects", title: "פרוייקטים" },
+    { path: "/projects", title: "פרויקטים" },
     { path: "/about", title: "עוד עלי" },
     { path: "/the-process", title: "תהליך" },
     { path: "/contact", title: "צור/י קשר" },
   ];
 
   const navLinksAdmin = [
-    { path: "/", title: "בית" },
-    { path: "/projects", title: "פרוייקטים" },
-    { path: "/about", title: "עוד עלי" },
-    { path: "/the-process", title: "תהליך" },
-    { path: "/edit-projects", title: "עריכת פרוייקטים" },
+    ...navLinksUser,
     { path: "/contact", title: "צור/י קשר" },
   ];
 
   const navLinks = user?.role === "admin" ? navLinksAdmin : navLinksUser;
   const variants = {
-    from: { opacity: 0, y: 200 },
+    from: { opacity: 0, y: 300 },
     to: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeInOut" },
+      transition: { duration: 1, ease: "easeInOut" },
     },
-
-    viewport: { once: true },
   };
   return (
     <motion.footer
       variants={variants}
       initial="from"
       whileInView="to"
+      viewport={{ once: true }}
       className="horizontal-page-padding my-bg-primary overflow-hidden py-20"
     >
       <div className="mb-5 lg:flex">

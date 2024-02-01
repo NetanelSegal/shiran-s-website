@@ -7,25 +7,29 @@ const ProjectsSection = () => {
     from: { opacity: 0 },
     to: {
       opacity: 1,
-      transition: { duration: 0.8, ease: "easeInOut" },
+      transition: { duration: 0.2, ease: "easeInOut", staggerChildren: 0.3 },
     },
   };
 
   return (
-    <motion.section
-      whileInView="to"
-      initial="from"
-      variants={enterAnimationVariants}
-      viewport={{ once: true }}
-      className="horizontal-page-padding section overflow-hidden"
-    >
-      <div className="mb-5 items-end gap-2">
-        <h2 className="font-bold">בונה חלומות</h2>
-        <h5>הפרוייקטים מנצחים שלי</h5>
-      </div>
+    <section className="horizontal-page-padding section overflow-hidden">
+      <motion.div
+        variants={enterAnimationVariants}
+        initial="from"
+        whileInView="to"
+        transition={{ duration: 0 }}
+        className="mb-5 items-end gap-2"
+      >
+        <motion.h2 variants={enterAnimationVariants} className="font-bold">
+          בונה חלומות
+        </motion.h2>
+        <motion.h5 variants={enterAnimationVariants}>
+          הפרוייקטים מנצחים שלי
+        </motion.h5>
+      </motion.div>
 
       <SelectedProjectsCarousel projectsData={selectedProjData} />
-    </motion.section>
+    </section>
   );
 };
 

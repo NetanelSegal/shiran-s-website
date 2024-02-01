@@ -10,20 +10,16 @@ const NavbarManager = () => {
   const { user } = useContext(UserContext);
   const { screenWidth } = useContext(AppContext);
 
-  const navLinks = [
+  const navLinksUser = [
     { path: "/", title: "בית" },
-    { path: "/projects", title: "פרוייקטים" },
+    { path: "/projects", title: "פרויקטים" },
     { path: "/about", title: "עוד עלי" },
     { path: "/the-process", title: "תהליך" },
     { path: "/contact", title: "צור/י קשר" },
   ];
 
   const navLinksAdmin = [
-    { path: "/", title: "בית" },
-    { path: "/projects", title: "פרוייקטים" },
-    { path: "/about", title: "עוד עלי" },
-    { path: "/the-process", title: "תהליך" },
-    { path: "/edit-projects", title: "עריכת פרוייקטים" },
+    ...navLinksUser,
     { path: "/contact", title: "צור/י קשר" },
   ];
 
@@ -32,12 +28,12 @@ const NavbarManager = () => {
       {screenWidth <= 1024 ? (
         <NavbarMobile
           logoSrc={logoSrc}
-          navLinks={user?.role === "admin" ? navLinksAdmin : navLinks}
+          navLinks={user?.role === "admin" ? navLinksAdmin : navLinksUser}
         />
       ) : (
         <NavbarDesktop
           logoSrc={logoSrc}
-          navLinks={user?.role === "admin" ? navLinksAdmin : navLinks}
+          navLinks={user?.role === "admin" ? navLinksAdmin : navLinksUser}
         />
       )}
     </>

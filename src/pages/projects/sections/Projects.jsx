@@ -3,7 +3,6 @@ import Project from "../../../components/project/Project";
 const Projects = () => {
   return (
     <div className="horizontal-page-padding">
-      <h2 className="py-5 text-center font-semibold">פרוייקטים :)</h2>
       {data.map((e, i) => (
         <Project key={e.title} i={i} data={e} />
       ))}

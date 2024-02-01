@@ -42,7 +42,6 @@ const ProcessSection = () => {
             svgContainerRef.current[i],
             sectionRef.current,
           );
-          // Adjust this logic based on your requirements
           const endPoint = getCenterOfElementInContainer(
             svgContainerRef.current[i + 1],
             sectionRef.current,
