@@ -19,9 +19,9 @@ const Project = ({ data, i }) => {
       scale: 1,
       x: "0",
       transition: {
-        duration: 0.8,
-        ease: "easeInOut",
-        staggerChildren: 0.02,
+        duration: 1,
+        ease: "easeOut",
+        staggerChildren: 0.01,
       },
     },
   };

@@ -1,12 +1,34 @@
-import React from "react";
+import { motion } from "framer-motion";
 
 const WhyShiranSection = () => {
+  const variants = {
+    from: { scale: 1.2, opacity: 0, y: 200 },
+    to: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.5, ease: "easeOut", staggerChildren: 0.2 },
+    },
+  };
+
   return (
-    <section className="horizontal-page-padding section ">
-      <h2 className="mb-10 text-center text-6xl font-bold">
+    <motion.section
+      variants={variants}
+      initial="from"
+      whileInView="to"
+      viewport={{ once: true }}
+      className="horizontal-page-padding section overflow-hidden"
+    >
+      <motion.h2
+        variants={variants}
+        className="mb-10 text-center text-5xl font-bold md:text-7xl"
+      >
         אני רוצה שתחיו את הבית שלכם כל יום מחדש
-      </h2>
-      <div className="lg:1/3 w-full sm:w-2/3 md:w-1/2">
+      </motion.h2>
+      <motion.div
+        variants={variants}
+        className="lg:1/3 w-full sm:w-2/3 md:w-1/2"
+      >
         <h5 className="mb-5">
           אני אוהבת למצוא פתרונות לצרכים אנשים בגלל זה הגעתי למקצוע, כדי לפתור
           את החידות האלה ולגרום לאנשים להרגיש מקסימום נוחות בבית
@@ -15,8 +37,8 @@ const WhyShiranSection = () => {
           אני אוהבת למצוא פתרונות לצרכים אנשים בגלל זה הגעתי למקצוע, כדי לפתור
           את החידות האלה ולגרום לאנשים להרגיש מקסימום נוחות בבית
         </h5>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 
