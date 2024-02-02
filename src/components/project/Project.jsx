@@ -1,27 +1,42 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 
 const Project = ({ data, i }) => {
-  const varients = {
+  const textContainerVariants = {
     fromRight: {
       opacity: 0,
-      scale: 1.2,
-      x: "-50%",
+      x: "50%",
     },
     fromLeft: {
       opacity: 0,
-      scale: 1.2,
       x: "-50%",
     },
     to: {
       opacity: 1,
-      scale: 1,
       x: "0",
       transition: {
+        type: "spring",
         duration: 1,
+        stiffness: 70,
+        staggerChildren: 0.05,
+      },
+    },
+  };
+
+  const projectContainerRef = useRef(null);
+  const imgVariants = {
+    fromRight: {
+      opacity: 0,
+    },
+    fromLeft: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
         ease: "easeOut",
-        staggerChildren: 0.01,
       },
     },
   };
@@ -31,53 +46,58 @@ const Project = ({ data, i }) => {
     (i % 2 == 0 ? "lg:flex " : "lg:flex-row-reverse lg:flex ");
 
   return (
-    <motion.div
-      variants={varients}
-      initial={i % 2 == 0 ? "fromRight" : "fromLeft"}
-      whileInView="to"
-      viewport={{ once: true }}
-      className={className}
-    >
+    <div ref={projectContainerRef} className={className}>
       {/* image containers */}
       <motion.div
-        variants={varients}
-        className="aspect-video overflow-hidden rounded-xl lg:w-2/3"
+        variants={imgVariants}
+        initial={i % 2 == 0 ? "fromRight" : "fromLeft"}
+        whileInView="to"
+        className="z-20 aspect-video overflow-hidden rounded-xl lg:w-2/3"
       >
         <img
           className="h-full w-full cursor-pointer object-cover transition-all duration-300  ease-in-out
         hover:scale-125"
           src={data.image}
-          alt=""
+          alt={"Project " + data.title + " image"}
         />
       </motion.div>
-
       {/* text containers */}
-      <motion.div variants={varients} className="lg:w-1/3">
-        <motion.h4 variants={varients} className="font-semibold">
+
+      <motion.div
+        variants={textContainerVariants}
+        initial={i % 2 == 0 ? "fromRight" : "fromLeft"}
+        whileInView="to"
+        className="lg:w-1/3"
+      >
+        <motion.h4 variants={textContainerVariants} className="font-semibold">
           {data.title}
         </motion.h4>
-        <motion.p variants={varients}>
+        <motion.p variants={textContainerVariants}>
           <strong>שנה: </strong>
           {data.year}
         </motion.p>
-        <motion.div variants={varients} className="flex flex-wrap gap-1">
+        <motion.div
+          variants={textContainerVariants}
+          className="flex flex-wrap gap-1"
+        >
           {data.tags.map((tag) => (
-            <p
+            <motion.p
+              variants={textContainerVariants}
               key={tag + i}
               className="my-bg-secondary rounded-lg px-3
           py-1 text-sm font-semibold"
             >
               {tag}
-            </p>
+            </motion.p>
           ))}
         </motion.div>
-        <motion.p variants={varients}>
+        <motion.p variants={textContainerVariants}>
           <strong>תיאור הפרוייקט: </strong>
-          <br /> {data.description}{" "}
+          <br /> {data.description}
           <Link className="font-semibold">עוד על הפרויקט</Link>
         </motion.p>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 

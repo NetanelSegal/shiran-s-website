@@ -7,7 +7,6 @@ const Layout = () => {
   return (
     <>
       <ScrollToTop />
-
       <NavbarManager />
       <Outlet />
       <Footer />

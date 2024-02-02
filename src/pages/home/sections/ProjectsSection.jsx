@@ -7,7 +7,7 @@ const ProjectsSection = () => {
     from: { opacity: 0 },
     to: {
       opacity: 1,
-      transition: { duration: 0.2, ease: "easeInOut", staggerChildren: 0.3 },
+      transition: { duration: 0.3, ease: "easeInOut", staggerChildren: 0.3 },
     },
   };
 
@@ -17,7 +17,7 @@ const ProjectsSection = () => {
         variants={enterAnimationVariants}
         initial="from"
         whileInView="to"
-        transition={{ duration: 0 }}
+        viewport={{ once: true }}
         className="mb-5 items-end gap-2"
       >
         <motion.h2 variants={enterAnimationVariants} className="font-bold">

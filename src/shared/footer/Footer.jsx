@@ -101,7 +101,7 @@ const Footer = () => {
         <img
           className="w-full p-4 lg:max-h-28 lg:w-1/3"
           src={srcShiranLogo}
-          alt=""
+          alt="Shiran logo image"
         />
       </div>
     </motion.footer>

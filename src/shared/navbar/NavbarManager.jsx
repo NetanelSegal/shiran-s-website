@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import logoSrc from "../../assets/shiran_logo.svg";
 import NavbarDesktop from "./NavbarDesktop";
 import NavbarMobile from "./NavbarMobile";
-import { Outlet } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { AppContext } from "../../context/AppContext";
 

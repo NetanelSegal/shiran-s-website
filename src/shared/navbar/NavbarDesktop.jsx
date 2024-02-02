@@ -12,7 +12,9 @@ const NavbarDesktop = ({ logoSrc, navLinks }) => {
         {navLinks.map((e) => (
           <li key={e.path}>
             {e.path === "/contact" ? (
-              <button className="my-btn-secondary">{e.title}</button>
+              <Link to={e.path}>
+                <button className="my-btn-secondary">{e.title}</button>
+              </Link>
             ) : (
               <Link to={e.path}>{e.title}</Link>
             )}
