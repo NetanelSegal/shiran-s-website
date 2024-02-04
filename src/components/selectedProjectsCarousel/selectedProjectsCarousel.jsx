@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { useDrag } from "react-use-gesture";
 
@@ -100,10 +100,6 @@ const SelectedProjectsCarousel = ({ projectsData }) => {
       axis: "x",
     },
   );
-
-  useEffect(() => {
-    console.log(isInView);
-  }, [isInView]);
 
   return (
     <div>

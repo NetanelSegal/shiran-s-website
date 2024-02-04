@@ -10,7 +10,6 @@ const SideMenu = ({ navLinks, setIsOpen, isOpen, btnExitRef }) => {
     open: { opacity: 1, y: "0" },
   };
   const handleClickOutside = ({ target }) => {
-    console.log(target);
     if (
       isOpen &&
       ref?.current != target &&

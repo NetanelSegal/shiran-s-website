@@ -58,7 +58,7 @@ const Project = ({ data, i }) => {
         viewport={{ once: true }}
         className="z-20 aspect-video overflow-hidden rounded-xl lg:w-2/3"
       >
-        <ParallaxEffect stiffness={"-50%"} ref={projectContainerRef}>
+        <ParallaxEffect stiffness={"-50%"} parentRef={projectContainerRef}>
           <img
             className="h-[150%] w-full cursor-pointer object-cover transition-all duration-300  ease-in-out
         hover:scale-125"

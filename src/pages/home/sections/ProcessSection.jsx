@@ -109,7 +109,7 @@ const ProcessSection = () => {
               <SvgShape
                 areInView={areInView}
                 setAreInView={setAreInView}
-                key={srcs[i]}
+                key={i}
                 i={i}
               />
             </div>

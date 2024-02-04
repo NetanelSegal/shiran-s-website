@@ -15,7 +15,7 @@ const HelloSectionImage = () => {
       className="relative mx-auto h-[480px] w-[400px] max-w-[90%] md:m-0 md:w-[320px] lg:h-[500px] lg:w-[400px] lg:max-w-[600px]"
     >
       <div className=" relative h-full w-full overflow-hidden rounded-bl-[1000px] rounded-br-[1000px] rounded-tl-full rounded-tr-full bg-black ">
-        <ParallaxEffect stiffness={"-100%"} ref={sectionRef}>
+        <ParallaxEffect stiffness={"-50%"} parentRef={sectionRef}>
           <motion.img
             className="h-[150%] w-full object-cover"
             src={shiranImgSrc}
@@ -24,7 +24,7 @@ const HelloSectionImage = () => {
           />
         </ParallaxEffect>
       </div>
-      <ParallaxEffect stiffness={"-400%"} ref={sectionRef}>
+      <ParallaxEffect stiffness={"-100%"} parentRef={sectionRef}>
         <motion.svg
           width="100"
           height="100"

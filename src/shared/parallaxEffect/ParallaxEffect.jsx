@@ -1,13 +1,15 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
-const ParallaxEffect = ({ stiffness = "50%", children, ref }) => {
+const ParallaxEffect = ({ stiffness = "50%", children, parentRef }) => {
   const useParallax = (value, distance) => {
     return useTransform(value, [0, 1], ["0%", distance]);
   };
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
+    target: parentRef,
+    offset: ["start end", "end start"],
+    layoutEffect: false,
   });
+
   const y = useParallax(scrollYProgress, stiffness);
 
   return (
