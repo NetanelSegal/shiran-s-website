@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import ParallaxEffect from "../../shared/parallaxEffect/ParallaxEffect";
 
 const Project = ({ data, i }) => {
   const textContainerVariants = {
@@ -25,6 +26,7 @@ const Project = ({ data, i }) => {
   };
 
   const projectContainerRef = useRef(null);
+
   const imgVariants = {
     fromRight: {
       opacity: 0,
@@ -40,6 +42,7 @@ const Project = ({ data, i }) => {
       },
     },
   };
+
   const className =
     "lg:gap-3" +
     (i == 0 ? " mt-10 " : " my-16 lg:my-20 ") +
@@ -52,14 +55,17 @@ const Project = ({ data, i }) => {
         variants={imgVariants}
         initial={i % 2 == 0 ? "fromRight" : "fromLeft"}
         whileInView="to"
+        viewport={{ once: true }}
         className="z-20 aspect-video overflow-hidden rounded-xl lg:w-2/3"
       >
-        <img
-          className="h-full w-full cursor-pointer object-cover transition-all duration-300  ease-in-out
+        <ParallaxEffect stiffness={"-50%"} ref={projectContainerRef}>
+          <img
+            className="h-[150%] w-full cursor-pointer object-cover transition-all duration-300  ease-in-out
         hover:scale-125"
-          src={data.image}
-          alt={"Project " + data.title + " image"}
-        />
+            src={data.image}
+            alt={"Project " + data.title + " image"}
+          />
+        </ParallaxEffect>
       </motion.div>
       {/* text containers */}
 
@@ -67,6 +73,7 @@ const Project = ({ data, i }) => {
         variants={textContainerVariants}
         initial={i % 2 == 0 ? "fromRight" : "fromLeft"}
         whileInView="to"
+        viewport={{ once: true }}
         className="lg:w-1/3"
       >
         <motion.h4 variants={textContainerVariants} className="font-semibold">

@@ -5,15 +5,8 @@ import {
   mainHeading,
   content as pageContent,
 } from "./content/processSectionContent";
-import svgSrc1 from "../../../assets/images/1.png";
-import svgSrc2 from "../../../assets/images/2.png";
-import svgSrc3 from "../../../assets/images/3.png";
-import svgSrc4 from "../../../assets/images/4.png";
-import svgSrc5 from "../../../assets/images/5.png";
 import SvgShape from "../../../components/theProcess/SvgShape";
 import { AppContext } from "../../../context/AppContext";
-
-const srcs = [svgSrc1, svgSrc2, svgSrc3, svgSrc4, svgSrc5];
 
 const ProcessSection = () => {
   const { screenWidth } = useContext(AppContext);
@@ -106,17 +99,16 @@ const ProcessSection = () => {
               className={
                 i % 2 == 1
                   ? i == 3
-                    ? "absolute -right-10 top-1/2 -z-20 h-7 w-9 "
-                    : "absolute -right-10 top-1/2 -z-20 h-7 w-7 "
+                    ? "absolute -right-10 top-1/2 -z-20"
+                    : "absolute -right-10 top-1/2 -z-20 "
                   : i == 4
-                    ? "absolute right-full top-1/3 -z-20 h-7 w-7 "
-                    : "absolute right-full top-1/2 -z-20 h-7 w-7 "
+                    ? "absolute right-full top-1/3 -z-20 "
+                    : "absolute right-full top-1/2 -z-20 "
               }
             >
               <SvgShape
                 areInView={areInView}
                 setAreInView={setAreInView}
-                src={srcs[i]}
                 key={srcs[i]}
                 i={i}
               />

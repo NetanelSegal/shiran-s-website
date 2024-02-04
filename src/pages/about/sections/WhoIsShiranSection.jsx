@@ -60,29 +60,17 @@ const WhoIsShiranSection = () => {
           variants={variants}
           className="my-bg-primary aspect-[3/1] w-full overflow-hidden rounded-2xl object-cover p-5 text-white md:aspect-[1/2] md:w-1/2"
         >
-          {screenWidth <= 1024 ? (
+          <ParallaxEffect stiffness={"200%"} ref={textContainerRef}>
             <motion.p
               initial={{ opacity: 0, y: 200 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5, ease: "easeInOut" }}
-              className="rounded-md bg-white p-2 font-semibold text-black sm:text-2xl"
+              className="rounded-md bg-white p-3 font-semibold text-black xl:text-2xl"
             >
               למדתי במכללה מובילה בתחום, השכלה גבוהה בעיצוב פנים ואדריכלות. רקע
-              חינוכי משולב עם ניסיון רב שלי
+              חינוכי משולב עם ניסיון רב, הוא התחילה בשלב האקדמי שלי
             </motion.p>
-          ) : (
-            <ParallaxEffect stiffness={-300} ref={textContainerRef}>
-              <motion.p
-                initial={{ opacity: 0, y: 200 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5, ease: "easeInOut" }}
-                className="rounded-md bg-white p-3 font-semibold text-black xl:text-2xl"
-              >
-                למדתי במכללה מובילה בתחום, השכלה גבוהה בעיצוב פנים ואדריכלות.
-                רקע חינוכי משולב עם ניסיון רב, הוא התחילה בשלב האקדמי שלי
-              </motion.p>
-            </ParallaxEffect>
-          )}
+          </ParallaxEffect>
         </motion.div>
       </motion.div>
 
@@ -99,7 +87,7 @@ const WhoIsShiranSection = () => {
       rounded-tr-2xl object-cover p-5 text-base text-white"
         >
           <div className="absolute bottom-5 right-5 origin-bottom-right scale-[40%] font-black sm:scale-50 md:scale-75 lg:scale-100">
-            <ParallaxEffect stiffness={80} ref={yearsContainerRef}>
+            <ParallaxEffect stiffness={"-200%"} ref={yearsContainerRef}>
               <div
                 ref={yearsContainerRef}
                 className="-mb-4 text-center text-9xl"
