@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 
 const FooterForm = () => {
   const feilds = ["name", "phoneNumber", "email"];
+  const autoCompletes = ["name", "tel", "email"];
 
   const getLabelFromField = (f) => {
     switch (f) {
@@ -61,7 +62,7 @@ const FooterForm = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="w-full">
-        {feilds.map((feild) => {
+        {feilds.map((feild, i) => {
           return (
             <div key={feild + " container"} className="relative my-2 w-full">
               <motion.label
@@ -74,6 +75,7 @@ const FooterForm = () => {
                 {getLabelFromField(feild)}
               </motion.label>
               <input
+                autoComplete={autoCompletes[i]}
                 id={feild}
                 onFocus={() => handleOnFocus(feild)}
                 onBlurCapture={() => handleOnBlur(feild)}
