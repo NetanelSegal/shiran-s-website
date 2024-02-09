@@ -4,6 +4,7 @@ const AppContext = createContext(null);
 
 const AppProvider = ({ children }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleWindowSizeChange() {
     setScreenWidth(window.innerWidth);
@@ -17,7 +18,9 @@ const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ screenWidth, setScreenWidth }}>
+    <AppContext.Provider
+      value={{ screenWidth, setScreenWidth, setIsLoading, isLoading }}
+    >
       {children}
     </AppContext.Provider>
   );

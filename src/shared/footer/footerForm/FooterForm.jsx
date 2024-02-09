@@ -58,7 +58,7 @@ const FooterForm = () => {
   return (
     <form
       className="justify-evenly gap-2 md:flex md:grow"
-      id="form"
+      id="footerForm"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="w-full">
@@ -70,18 +70,18 @@ const FooterForm = () => {
                 initial="from"
                 animate={inputsState[feild] ? "to" : "from"}
                 className="my-bg-secondary absolute right-2 rounded-md px-2 font-bold"
-                htmlFor={feild}
+                htmlFor={feild + "-footer"}
               >
                 {getLabelFromField(feild)}
               </motion.label>
               <input
                 autoComplete={autoCompletes[i]}
-                id={feild}
+                id={feild + "-footer"}
                 onFocus={() => handleOnFocus(feild)}
                 onBlurCapture={() => handleOnBlur(feild)}
                 className="w-full rounded-xl p-2 "
                 {...register(feild)}
-                key={feild}
+                key={feild + "-footer"}
               />
               {errors?.[feild] && (
                 <p className="text-red-500" key={"error " + feild}>
@@ -115,7 +115,7 @@ const FooterForm = () => {
           <button
             className={`my-btn-secondary btn-effect w-full hover:bg-[#ccbebc] hover:text-black hover:after:left-full`}
             type="submit"
-            form="form"
+            form="footerForm"
           >
             שלח
           </button>

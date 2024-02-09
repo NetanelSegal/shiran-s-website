@@ -4,7 +4,7 @@ import Section3 from "./sections/Section3";
 import Section4 from "./sections/Section4";
 import Section5 from "./sections/Section5";
 
-const TheProcess = () => {
+const TheProcessPage = () => {
   return (
     <div className="overflow-y-hidden">
       <h2 className="pb-5 pt-20 text-center font-bold">התהליך</h2>
@@ -17,4 +17,4 @@ const TheProcess = () => {
   );
 };
 
-export default TheProcess;
+export default TheProcessPage;

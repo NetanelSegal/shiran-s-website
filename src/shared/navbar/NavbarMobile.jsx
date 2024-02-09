@@ -1,14 +1,22 @@
 import React, { useRef, useState } from "react";
-import "./style/Navbar.css";
 import SideMenu from "./sideMenu/SideMenu";
 import { Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import srcIconUser from "../../assets/icons/user.svg";
+import UserProfileMenu from "./userProfileMenu/UserProfileMenu";
+import "./style/Navbar.css";
 
 const NavbarMobile = ({ logoSrc, navLinks }) => {
-  const [isSideMenuOn, setiIsSideMenuOn] = useState(false);
+  const [isSideMenuOn, setIsSideMenuOn] = useState(false);
+  const [isUserMenuOn, setIsUserMenuOn] = useState(false);
   const btnExitRef = useRef(null);
-  const handleOnClick = () => {
-    setiIsSideMenuOn((prevState) => !prevState);
+
+  const handleMenuOnClick = () => {
+    setIsSideMenuOn((prevState) => !prevState);
+  };
+
+  const handleUserMenuOnClick = () => {
+    setIsUserMenuOn((prevState) => !prevState);
   };
 
   return (
@@ -17,25 +25,44 @@ const NavbarMobile = ({ logoSrc, navLinks }) => {
         <Link to={`/`}>
           <img className="h-10" src={logoSrc} alt="" />
         </Link>
-        <button
-          ref={btnExitRef}
-          onClick={handleOnClick}
-          className="my-bg-secondary px-3 py-1 text-xl text-black "
-        >
-          {isSideMenuOn ? (
-            <i className="fa-solid fa-xmark"></i>
-          ) : (
-            <i className="fa-solid fa-bars"></i>
-          )}
-        </button>
+        <div className="flex gap-2">
+          <img
+            className="cursor-pointer"
+            onClick={handleUserMenuOnClick}
+            width="40"
+            src={srcIconUser}
+            alt={"user icon"}
+          />
+
+          <button
+            ref={btnExitRef}
+            onClick={handleMenuOnClick}
+            className="my-bg-secondary px-3 py-1 text-xl text-black "
+          >
+            {isSideMenuOn ? (
+              <i className="fa-solid fa-xmark"></i>
+            ) : (
+              <i className="fa-solid fa-bars"></i>
+            )}
+          </button>
+        </div>
       </div>
       <AnimatePresence>
         {isSideMenuOn && (
           <SideMenu
             btnExitRef={btnExitRef}
-            setIsOpen={setiIsSideMenuOn}
+            setIsOpen={setIsSideMenuOn}
             isOpen={isSideMenuOn}
             navLinks={navLinks}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isUserMenuOn && (
+          <UserProfileMenu
+            setIsOpen={setIsUserMenuOn}
+            isOpen={isUserMenuOn}
+            onExit={handleUserMenuOnClick}
           />
         )}
       </AnimatePresence>

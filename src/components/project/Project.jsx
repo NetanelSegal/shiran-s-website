@@ -1,7 +1,22 @@
 import { motion } from "framer-motion";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import ParallaxEffect from "../../shared/parallaxEffect/ParallaxEffect";
+import { urls } from "../../constants/urls";
+
+const exampleProj = {
+  title: "מסעדת פיצה בסגנון איטלקי",
+  categories: ["מסעדות ובתי קפה", "עיצוב פנים"],
+  description: "עיצוב מסעדת פיצה באווירה איטלקית אותנטית",
+  mainImage: "https://example.com/image5.jpg",
+  images: ["https://example.com/image5.jpg", "https://example.com/image6.jpg"],
+  location: "רומא, איטליה",
+  client: "מסעדת הפיצה 'בלו פיצה'",
+  completionDate: {
+    $date: "2023-12-20T00:00:00.000Z",
+  },
+  favourite: false,
+};
 
 const Project = ({ data, i }) => {
   const textContainerVariants = {
@@ -48,6 +63,10 @@ const Project = ({ data, i }) => {
     (i == 0 ? " mt-10 " : " my-16 lg:my-20 ") +
     (i % 2 == 0 ? "lg:flex " : "lg:flex-row-reverse lg:flex ");
 
+  useEffect(() => {
+    data.images.forEach((e) => console.log(urls.assets + "/" + e));
+  }, []);
+
   return (
     <div ref={projectContainerRef} className={className}>
       {/* image containers */}
@@ -87,7 +106,7 @@ const Project = ({ data, i }) => {
           variants={textContainerVariants}
           className="flex flex-wrap gap-1"
         >
-          {data.tags.map((tag) => (
+          {/* {data.tags.map((tag) => (
             <motion.p
               variants={textContainerVariants}
               key={tag + i}
@@ -96,7 +115,7 @@ const Project = ({ data, i }) => {
             >
               {tag}
             </motion.p>
-          ))}
+          ))} */}
         </motion.div>
         <motion.p variants={textContainerVariants}>
           <strong>תיאור הפרוייקט: </strong>

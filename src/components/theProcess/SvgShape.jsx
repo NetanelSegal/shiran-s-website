@@ -7,7 +7,7 @@ const SvgShape = ({ i, setAreInView }) => {
   const svg1 = (
     <svg
       ref={shapeRef}
-      xmlns="http://www.w3.org/2000/svg"
+      overflow="visible"
       width="33.844"
       height="33.843"
       viewBox="0 0 33.844 33.843"
@@ -24,7 +24,7 @@ const SvgShape = ({ i, setAreInView }) => {
   const svg2 = (
     <svg
       ref={shapeRef}
-      xmlns="http://www.w3.org/2000/svg"
+      overflow="visible"
       width="33.42"
       height="33.569"
       viewBox="0 0 33.42 33.569"
@@ -42,7 +42,7 @@ const SvgShape = ({ i, setAreInView }) => {
   const svg3 = (
     <svg
       ref={shapeRef}
-      xmlns="http://www.w3.org/2000/svg"
+      overflow="visible"
       width="30.572"
       height="32.613"
       viewBox="0 0 30.572 32.613"
@@ -60,7 +60,7 @@ const SvgShape = ({ i, setAreInView }) => {
   const svg4 = (
     <svg
       ref={shapeRef}
-      xmlns="http://www.w3.org/2000/svg"
+      overflow="visible"
       width="50.692"
       height="24.044"
       viewBox="0 0 50.692 24.044"
@@ -78,7 +78,7 @@ const SvgShape = ({ i, setAreInView }) => {
   const svg5 = (
     <svg
       ref={shapeRef}
-      xmlns="http://www.w3.org/2000/svg"
+      overflow="visible"
       width="31.505"
       height="31.637"
       viewBox="0 0 31.505 31.637"
