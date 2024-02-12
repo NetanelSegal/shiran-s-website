@@ -69,7 +69,7 @@ span {
     @apply relative overflow-hidden rounded-xl
    px-6 py-2 font-bold text-white transition-all
    duration-200 ease-in-out
-   hover:scale-110 hover:bg-transparent active:scale-95;
+   active:scale-95;
   }
   .btn-effect::after {
     z-index: -1;
@@ -80,6 +80,10 @@ span {
     right: 0;
     bottom: 0;
     @apply transition-all duration-200 ease-in-out;
+  }
+  .btn-effect:hover {
+    background-color: transparent;
+    scale: 1.1;
   }
   .btn-effect:hover::after {
     left: 0;

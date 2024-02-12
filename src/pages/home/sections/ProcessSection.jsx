@@ -64,7 +64,6 @@ const ProcessSection = () => {
         initial="from"
         variants={enterAnimationVariants}
         viewport={{ once: true }}
-        onAnimationComplete={() => setIsAnimationComplete(true)}
         className="mb-5 text-center"
       >
         <h2 className="font-bold">{mainHeading}</h2>
@@ -75,6 +74,7 @@ const ProcessSection = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: "backIn" }}
           viewport={{ once: true }}
+          onAnimationComplete={() => setIsAnimationComplete(true)}
           key={eContent.heading}
           className={"my-16 " + i == pageContent.length - 1 ? "mb-0" : ""}
         >

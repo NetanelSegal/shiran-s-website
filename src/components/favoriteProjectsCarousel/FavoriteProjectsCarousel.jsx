@@ -1,7 +1,7 @@
 import { motion, useMotionValue } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const DRAG_DISTANCE = 50;
+const DRAG_DISTANCE = 30;
 
 const FavoriteProjectsCarousel = ({ projects }) => {
   const [currProjectIndex, setCurrProjectIndex] = useState(0);
