@@ -57,7 +57,7 @@ const ProcessSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="horizontal-page-padding  relative overflow-hidden"
+      className="horizontal-page-padding  relative overflow-hidden pt-14"
     >
       <motion.div
         whileInView="to"
@@ -99,7 +99,7 @@ const ProcessSection = () => {
               className={
                 i % 2 == 1
                   ? i == 3
-                    ? "absolute -right-10 top-1/2 -z-20"
+                    ? "absolute -right-14 top-1/2 -z-20"
                     : "absolute -right-10 top-1/2 -z-20 "
                   : i == 4
                     ? "absolute right-full top-1/3 -z-20 "

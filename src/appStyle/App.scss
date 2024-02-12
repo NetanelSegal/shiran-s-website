@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+img {
+  user-select: none;
+}
+
 .my-bg-primary {
   background-color: var(--primary-dark-color);
 }

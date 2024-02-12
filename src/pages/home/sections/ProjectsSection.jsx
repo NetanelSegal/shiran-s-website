@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import SelectedProjectsCarousel from "../../../components/selectedProjectsCarousel/selectedProjectsCarousel";
 import { selectedProjData } from "./content/projectsSectionContent";
+import FavoriteProjectsCarousel from "../../../components/favoriteProjectsCarousel/FavoriteProjectsCarousel";
 
 const ProjectsSection = () => {
   const enterAnimationVariants = {
@@ -27,8 +28,7 @@ const ProjectsSection = () => {
           הפרוייקטים מנצחים שלי
         </motion.h5>
       </motion.div>
-
-      <SelectedProjectsCarousel projectsData={selectedProjData} />
+      <FavoriteProjectsCarousel projects={selectedProjData} />
     </section>
   );
 };
