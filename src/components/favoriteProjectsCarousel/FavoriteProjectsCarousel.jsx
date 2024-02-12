@@ -39,7 +39,7 @@ const FavoriteProjectsCarousel = ({ projects }) => {
     <div>
       <motion.div
         drag="x"
-        dragConstraints={{ left: DRAG_DISTANCE, right: DRAG_DISTANCE }}
+        dragConstraints={{ left: 0, right: 0 }}
         className="mb-1 flex aspect-video w-full"
         animate={{
           translateX: `${currProjectIndex * 100}%`,
@@ -67,7 +67,8 @@ const FavoriteProjectsCarousel = ({ projects }) => {
           >
             <img
               draggable="false"
-              className="h-full w-full object-cover transition-all duration-300 ease-in-out hover:scale-125"
+              width="100%"
+              className="object-cover transition-all duration-300 ease-in-out hover:scale-125"
               src={data.img}
               alt=""
               key={i}
