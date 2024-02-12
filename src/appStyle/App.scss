@@ -66,9 +66,11 @@ span {
   .btn-effect {
     @apply relative overflow-hidden rounded-xl
    px-6 py-2 font-bold text-white transition-all
-   duration-200 ease-in-out
-   active:scale-95;
+   duration-200 ease-in-out;
 
+    &:active {
+      @apply scale-95;
+    }
     &::after {
       z-index: -1;
       position: absolute;
@@ -112,8 +114,7 @@ span {
   .btn-effect {
     @apply relative overflow-hidden rounded-xl
    px-6 py-2 font-bold text-white transition-all
-   duration-200 ease-in-out
-    active:scale-90;
+   duration-200 ease-in-out;
   }
   .my-btn-primary {
     @apply my-bg-primary text-white;
@@ -121,6 +122,11 @@ span {
 
   .my-btn-secondary {
     @apply my-bg-secondary text-black;
+  }
+
+  &:hover,
+  &:active {
+    transform: scale(1.1);
   }
 }
 

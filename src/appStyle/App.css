@@ -68,8 +68,10 @@ span {
   .btn-effect {
     @apply relative overflow-hidden rounded-xl
    px-6 py-2 font-bold text-white transition-all
-   duration-200 ease-in-out
-   active:scale-95;
+   duration-200 ease-in-out;
+  }
+  .btn-effect:active {
+    @apply scale-95;
   }
   .btn-effect::after {
     z-index: -1;
@@ -105,8 +107,7 @@ span {
   .btn-effect {
     @apply relative overflow-hidden rounded-xl
    px-6 py-2 font-bold text-white transition-all
-   duration-200 ease-in-out
-    active:scale-90;
+   duration-200 ease-in-out;
   }
   .my-btn-primary {
     @apply my-bg-primary text-white;

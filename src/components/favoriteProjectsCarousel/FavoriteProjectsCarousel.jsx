@@ -39,7 +39,7 @@ const FavoriteProjectsCarousel = ({ projects }) => {
     <div>
       <motion.div
         drag="x"
-        dragConstraints={{ left: 0, right: 0 }}
+        dragConstraints={{ left: DRAG_DISTANCE, right: DRAG_DISTANCE }}
         className="mb-1 flex aspect-video w-full"
         animate={{
           translateX: `${currProjectIndex * 100}%`,
