@@ -36,7 +36,7 @@ const FavoriteProjectsCarousel = ({ projects }) => {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <motion.div
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
@@ -63,7 +63,7 @@ const FavoriteProjectsCarousel = ({ projects }) => {
               ease: "linear",
             }}
             key={data.title + i}
-            className="aspect-video shrink-0 cursor-pointer overflow-hidden rounded-xl"
+            className="aspect-video w-full shrink-0 cursor-pointer overflow-hidden rounded-xl"
           >
             <img
               draggable="false"
