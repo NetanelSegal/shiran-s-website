@@ -2,10 +2,14 @@ import Form from "../../shared/form/Form";
 import Joi from "joi";
 import { urls } from "../../constants/urls";
 import { apiPost } from "../../utils/apiRequests";
-import { useContext, useEffect } from "react";
-import { AppContext } from "../../context/AppContext";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const { user, setUser } = useContext(UserContext);
+  const nav = useNavigate();
+
   const joiSchema = Joi.object({
     email: Joi.string()
       .email({ tlds: { allow: false } })
@@ -31,7 +35,8 @@ const LoginPage = () => {
   const login = async (formData) => {
     try {
       const { data } = await apiPost(urls.login, formData);
-      console.log(data);
+      setUser(data.user);
+      nav("/");
     } catch (err) {
       console.log(err.response.data);
     }

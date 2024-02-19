@@ -4,6 +4,7 @@ import { useState } from "react";
 const DRAG_DISTANCE = 30;
 
 const FavoriteProjectsCarousel = ({ projects }) => {
+  projects = [...projects, projects[0]];
   const [currProjectIndex, setCurrProjectIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 

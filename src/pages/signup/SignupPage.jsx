@@ -3,8 +3,11 @@ import Joi from "joi";
 import { urls } from "../../constants/urls";
 import { apiPost } from "../../utils/apiRequests";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
+  const nav = useNavigate();
+
   const [error, setError] = useState(null);
   const joiSchema = Joi.object({
     username: Joi.string().min(3).max(30).required().messages({
@@ -36,7 +39,7 @@ const SignupPage = () => {
   const signup = async (formData) => {
     try {
       const { data } = await apiPost(urls.signup, formData);
-      console.log(data);
+      nav("/login");
     } catch (err) {
       if (err.response.data.stack.code == 11000) {
         setError("הכתובת מייל שהוכנסה כבר קיימת במערכת");

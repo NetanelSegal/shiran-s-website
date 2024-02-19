@@ -1,24 +1,11 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ParallaxEffect from "../../shared/parallaxEffect/ParallaxEffect";
 import { urls } from "../../constants/urls";
 
-const exampleProj = {
-  title: "מסעדת פיצה בסגנון איטלקי",
-  categories: ["מסעדות ובתי קפה", "עיצוב פנים"],
-  description: "עיצוב מסעדת פיצה באווירה איטלקית אותנטית",
-  mainImage: "https://example.com/image5.jpg",
-  images: ["https://example.com/image5.jpg", "https://example.com/image6.jpg"],
-  location: "רומא, איטליה",
-  client: "מסעדת הפיצה 'בלו פיצה'",
-  completionDate: {
-    $date: "2023-12-20T00:00:00.000Z",
-  },
-  favourite: false,
-};
-
 const Project = ({ data, i }) => {
+  const nav = useNavigate();
   const textContainerVariants = {
     fromRight: {
       opacity: 0,
@@ -59,13 +46,9 @@ const Project = ({ data, i }) => {
   };
 
   const className =
-    "lg:gap-3" +
+    "lg:gap-3 my-20" +
     (i == 0 ? " mt-10 " : " my-16 lg:my-20 ") +
     (i % 2 == 0 ? "lg:flex " : "lg:flex-row-reverse lg:flex ");
-
-  useEffect(() => {
-    data.images.forEach((e) => console.log(urls.assets + "/" + e));
-  }, []);
 
   return (
     <div ref={projectContainerRef} className={className}>
@@ -79,9 +62,10 @@ const Project = ({ data, i }) => {
       >
         <ParallaxEffect stiffness={"-50%"} parentRef={projectContainerRef}>
           <img
+            onClick={() => nav(`/projects/${data._id}`)}
             className="h-[150%] w-full cursor-pointer object-cover transition-all duration-300  ease-in-out
         hover:scale-125"
-            src={data.image}
+            src={`${urls.assets}/${data.mainImage}`}
             alt={"Project " + data.title + " image"}
           />
         </ParallaxEffect>
@@ -99,8 +83,8 @@ const Project = ({ data, i }) => {
           {data.title}
         </motion.h4>
         <motion.p variants={textContainerVariants}>
-          <strong>שנה: </strong>
-          {data.year}
+          <strong>סטטוס: </strong>
+          {data.isCompleted ? "הושלם" : "בתהליך"}
         </motion.p>
         <motion.div
           variants={textContainerVariants}
@@ -119,8 +103,8 @@ const Project = ({ data, i }) => {
         </motion.div>
         <motion.p variants={textContainerVariants}>
           <strong>תיאור הפרוייקט: </strong>
-          <br /> {data.description}
-          <Link className="font-semibold">עוד על הפרויקט</Link>
+          {data.description} <br />
+          <Link className="font-semibold underline">עוד על הפרויקט</Link>
         </motion.p>
       </motion.div>
     </div>

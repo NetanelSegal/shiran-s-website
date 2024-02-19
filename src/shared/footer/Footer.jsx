@@ -38,12 +38,12 @@ const Footer = () => {
     { path: "/contact", title: "צור/י קשר" },
   ];
 
-  const navLinksAdmin = [
-    ...navLinksUser,
-    { path: "/contact", title: "צור/י קשר" },
-  ];
+  const navLinksAdmin = [{ path: "/admin", title: "עריכה" }, ...navLinksUser];
 
-  const navLinks = user?.role === "admin" ? navLinksAdmin : navLinksUser;
+  const navLinks =
+    user?.role == "admin" || user?.role == "developer"
+      ? navLinksAdmin
+      : navLinksUser;
   const variants = {
     from: { opacity: 0, y: 300 },
     to: {

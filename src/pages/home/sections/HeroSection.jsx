@@ -11,7 +11,7 @@ const HeroSection = () => {
   };
 
   const heroVideoSrc =
-    "https://www.youtube.com/embed/N-UhnCYRSy4?si=gE7ia2fBW3prgvrY&amp;controls=0";
+    "https://www.youtube.com/embed/N-UhnCYRSy4?si=gE7ia2fBW3prgvrY&amp;controls=0&loop=1&autoplay=1&mute=1";
 
   return (
     <section className="relative overflow-hidden">
@@ -21,7 +21,7 @@ const HeroSection = () => {
         animate="animate"
         className="h-[70dvh] max-h-dvh min-h-[700px] min-w-full object-cover sm:aspect-video sm:w-full lg:h-full"
         width="100%"
-        src="https://www.youtube.com/embed/N-UhnCYRSy4?si=gE7ia2fBW3prgvrY&amp;controls=0&loop=1&autoplay=1&mute=1"
+        src={heroVideoSrc}
         title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

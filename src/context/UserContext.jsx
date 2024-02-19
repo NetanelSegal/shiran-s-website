@@ -15,9 +15,7 @@ const UserProvider = ({ children }) => {
       console.log(err.response.data);
     }
   };
-  useEffect(() => {
-    checkUserAuth();
-  }, []);
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}
