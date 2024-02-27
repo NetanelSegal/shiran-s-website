@@ -17,7 +17,7 @@ const NavbarManager = () => {
     { path: "/contact", title: "צור/י קשר" },
   ];
 
-  const navLinksAdmin = [{ path: "/admin", title: "עריכה" }, ...navLinksUser];
+  const navLinksAdmin = [...navLinksUser];
 
   return (
     <>
@@ -25,7 +25,7 @@ const NavbarManager = () => {
         <NavbarMobile
           logoSrc={logoSrc}
           navLinks={
-            user?.role == "admin" || user.role === "developer"
+            user?.role == "admin" || user?.role === "developer"
               ? navLinksAdmin
               : navLinksUser
           }
@@ -34,7 +34,7 @@ const NavbarManager = () => {
         <NavbarDesktop
           logoSrc={logoSrc}
           navLinks={
-            user?.role == "admin" || user.role === "developer"
+            user?.role == "admin" || user?.role === "developer"
               ? navLinksAdmin
               : navLinksUser
           }

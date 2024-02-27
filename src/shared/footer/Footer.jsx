@@ -38,7 +38,10 @@ const Footer = () => {
     { path: "/contact", title: "צור/י קשר" },
   ];
 
-  const navLinksAdmin = [{ path: "/admin", title: "עריכה" }, ...navLinksUser];
+  const navLinksAdmin = [
+    { path: "/admin", title: "עמוד מנהל" },
+    ...navLinksUser,
+  ];
 
   const navLinks =
     user?.role == "admin" || user?.role == "developer"
@@ -67,7 +70,7 @@ const Footer = () => {
         <FooterForm />
       </div>
       <div className="flex flex-col lg:flex-row-reverse lg:items-end lg:justify-between">
-        <div className="w-full justify-end gap-5 sm:flex sm:flex-row-reverse">
+        <div className="w-full justify-evenly gap-5 sm:flex sm:flex-row-reverse md:flex md:grow">
           <div className="mb-5 w-full">
             {shiransContactInfo.map((e) => (
               <div
@@ -79,7 +82,7 @@ const Footer = () => {
               </div>
             ))}
           </div>
-          <div className="mb-5 mt-2 w-full gap-10 whitespace-nowrap text-center font-semibold text-white underline sm:flex sm:w-full sm:justify-start lg:items-end">
+          <div className="w-full gap-10 whitespace-nowrap pb-3 text-center font-semibold text-white underline sm:flex sm:w-full sm:justify-start lg:items-end">
             {navLinks.map(
               (e, i) =>
                 i % 3 === 0 && (
@@ -98,11 +101,13 @@ const Footer = () => {
             )}
           </div>
         </div>
-        <img
-          className="w-full p-4 lg:max-h-28 lg:w-1/3"
-          src={srcShiranLogo}
-          alt="Shiran logo image"
-        />
+        <div className="w-full text-center lg:w-1/3">
+          <img
+            className="h-full w-full object-contain p-4"
+            src={srcShiranLogo}
+            alt="Shiran logo image"
+          />
+        </div>
       </div>
     </motion.footer>
   );

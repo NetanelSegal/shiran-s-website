@@ -2,12 +2,11 @@ import { motion } from "framer-motion";
 
 const WhyShiranSection = () => {
   const variants = {
-    from: { scale: 1.2, opacity: 0, y: 200 },
+    from: { opacity: 0, y: 200 },
     to: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      transition: { duration: 0.5, ease: "easeOut", staggerChildren: 0.2 },
+      transition: { duration: 0.8, ease: "easeInOut", staggerChildren: 0.2 },
     },
   };
 

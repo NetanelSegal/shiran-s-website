@@ -1,9 +1,10 @@
-import React from "react";
+import FavoriteProjectsCarousel from "../../shared/favoriteProjectsCarousel/FavoriteProjectsCarousel";
 
 const ProjectPage = ({ data }) => {
   return (
-    <div className="section horizontal-page-padding bg-black text-white">
+    <div className="horizontal-page-padding pt-14">
       {data.title}
+      <img width="100%" src={data.mainImage} alt="" />
     </div>
   );
 };

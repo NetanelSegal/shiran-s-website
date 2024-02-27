@@ -7,8 +7,10 @@ import {
 } from "./content/processSectionContent";
 import SvgShape from "../../../components/theProcess/SvgShape";
 import { AppContext } from "../../../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const ProcessSection = () => {
+  const nav = useNavigate();
   const { screenWidth } = useContext(AppContext);
   const [isAnimationComplete, setIsAnimationComplete] = useState(false);
 
@@ -90,7 +92,10 @@ const ProcessSection = () => {
             <h4 className="font-semibold">{eContent.heading}</h4>
             <p>{eContent.text}</p>
             {i == pageContent.length - 1 && (
-              <button className="my-btn-primary btn-effect my-2">
+              <button
+                onClick={() => nav("/the-process")}
+                className="my-btn-primary btn-effect my-2"
+              >
                 עוד על התהליך
               </button>
             )}

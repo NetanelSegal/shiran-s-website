@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import HelloSectionImage from "../../../components/helloSectionImage/HelloSectionImage";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HelloSection = () => {
+  const nav = useNavigate();
+
   const sectionRef = useRef(null);
   const variants = {
     from: { opacity: 0, y: 300 },
@@ -38,10 +41,18 @@ const HelloSection = () => {
             והכריות המתאימים.
           </p>
           <div>
-            <button className="my-btn-primary btn-effect ml-2">
+            <button
+              onClick={() => nav("/contact")}
+              className="my-btn-primary btn-effect ml-2"
+            >
               צור/י קשר
             </button>
-            <button className="my-btn-secondary btn-effect">פרוייקטים</button>
+            <button
+              onClick={() => nav("/projects")}
+              className="my-btn-secondary btn-effect"
+            >
+              פרוייקטים
+            </button>
           </div>
         </motion.div>
       </motion.div>

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "../pages/home/HomePage.jsx";
 import ProjectsPage from "../pages/projects/ProjectsPage.jsx";
@@ -12,22 +11,18 @@ import AdminPage from "../pages/admin/AdminPage.jsx";
 import ProjectPage from "../pages/project/ProjectPage.jsx";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext.jsx";
-import { apiGet } from "../utils/apiRequests.js";
-import { urls } from "../constants/urls.js";
+import { AppContext } from "../context/AppContext.jsx";
+import PageLoader from "../shared/loaders/PageLoader.jsx";
+import EditProjectPage from "../pages/admin/EditProjectPage.jsx";
+import AddProjectPage from "../pages/admin/AddProjectPage.jsx";
 
 const AppRoutes = () => {
   const { user } = useContext(UserContext);
-  const [projectsData, setProjectsData] = useState([]);
+  const { setIsLoading, isLoading, projectsData } = useContext(AppContext);
 
-  const getProjects = async () => {
-    const { data } = await apiGet(urls.projects);
-    setProjectsData(data);
-  };
-
-  useEffect(() => {
-    getProjects();
-  }, []);
-
+  if (isLoading) {
+    return <PageLoader />;
+  }
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -37,7 +32,7 @@ const AppRoutes = () => {
         <Route path="contact" element={<ContactPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="signup" element={<SignupPage />} />
-        <Route path="projects" element={<ProjectsPage data={projectsData} />} />
+        <Route path="projects" element={<ProjectsPage />} />
         {projectsData.map((p) => (
           <Route
             key={p._id}
@@ -46,8 +41,20 @@ const AppRoutes = () => {
           />
         ))}
         <Route path="*" element={<h1>404 page not found</h1>} />
-        {(user.role === "admin" || user.role === "developer") && (
-          <Route path="/admin" element={<AdminPage />} />
+
+        {/* admin routes */}
+        {(user?.role === "admin" || user?.role === "developer") && (
+          <>
+            <Route path="admin" element={<AdminPage />} />
+            {projectsData.map((p) => (
+              <Route
+                key={p._id}
+                path={`admin/edit-project/:id`}
+                element={<EditProjectPage />}
+              />
+            ))}
+            <Route path="admin/add-project" element={<AddProjectPage />} />
+          </>
         )}
       </Route>
     </Routes>

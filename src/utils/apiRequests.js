@@ -1,14 +1,11 @@
 import axios from "axios";
 
-const apiGet = async (url, data) => {
+const apiGet = async (url) => {
     try {
         const resp = await axios({
             method: "GET",
             url,
-            data,
-            headers: {
-                "x-api-key": localStorage.getItem("x-api-key")
-            }
+            withCredentials: true
         })
         return resp
     } catch (error) {
@@ -29,15 +26,14 @@ const apiPost = async (url, data) => {
         throw error;
     }
 }
+
 const apiPut = async (url, data) => {
     try {
         const resp = await axios({
             method: "PUT",
             url,
             data,
-            headers: {
-                "x-api-key": localStorage.getItem("x-api-key")
-            }
+            withCredentials: true
         })
         return resp
     } catch (error) {
@@ -50,9 +46,7 @@ const apiDelete = async (url, data) => {
             method: "DELETE",
             url,
             data,
-            headers: {
-                "x-api-key": localStorage.getItem("x-api-key")
-            }
+            withCredentials: true
         })
         return resp
     } catch (error) {

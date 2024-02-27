@@ -52,7 +52,7 @@ const Form = ({ feilds, onSubmit, joiSchema }) => {
   return (
     <form id="form" className="w-full" onSubmit={handleSubmit(onSubmit)}>
       {feilds.map((feild, i) => (
-        <div key={feild + " signup"} className="relative my-2 w-full">
+        <div key={feild + " form"} className="relative my-2 w-full">
           <motion.label
             variants={labelVarients}
             initial="from"

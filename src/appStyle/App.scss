@@ -115,6 +115,9 @@ span {
     @apply relative overflow-hidden rounded-xl
    px-6 py-2 font-bold text-white transition-all
    duration-200 ease-in-out;
+    &:hover &:active {
+      transform: scale(1.1);
+    }
   }
   .my-btn-primary {
     @apply my-bg-primary text-white;
@@ -122,11 +125,6 @@ span {
 
   .my-btn-secondary {
     @apply my-bg-secondary text-black;
-  }
-
-  &:hover,
-  &:active {
-    transform: scale(1.1);
   }
 }
 
@@ -141,4 +139,28 @@ button {
 
 .section {
   @apply py-14 sm:py-20 md:py-24 lg:py-32;
+}
+
+.radio-label:has(input[type="radio"]:checked) {
+  background-color: var(--secondary-light-color);
+  font-weight: bold;
+}
+
+label {
+  user-select: none;
+}
+
+label:has(input[type="checkbox"]:checked) {
+  background-color: var(--secondary-light-color);
+  font-weight: bold;
+}
+
+label:has(input[type="checkbox"]) {
+  font-weight: 600;
+}
+
+label {
+  input[type="file"] {
+    display: none;
+  }
 }

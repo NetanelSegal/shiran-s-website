@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./style/Navbar.css";
 import srcIconUser from "../../assets/icons/user.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import UserProfileMenu from "./userProfileMenu/UserProfileMenu";
 import { AnimatePresence } from "framer-motion";
 
@@ -11,10 +11,6 @@ const NavbarDesktop = ({ logoSrc, navLinks }) => {
   const handleUserMenuOnClick = () => {
     setIsUserMenuOn((prevState) => !prevState);
   };
-
-  useEffect(() => {
-    console.log(isUserMenuOn);
-  }, [isUserMenuOn]);
 
   return (
     <>

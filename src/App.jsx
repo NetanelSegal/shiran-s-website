@@ -7,11 +7,11 @@ import AppRoutes from "./routes/AppRoutes.jsx";
 function App() {
   return (
     <BrowserRouter>
-      <UserProvider>
-        <AppProvider>
+      <AppProvider>
+        <UserProvider>
           <AppRoutes />
-        </AppProvider>
-      </UserProvider>
+        </UserProvider>
+      </AppProvider>
     </BrowserRouter>
   );
 }

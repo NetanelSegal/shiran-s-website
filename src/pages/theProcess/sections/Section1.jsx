@@ -24,7 +24,7 @@ const Section1 = () => {
       transition={{ duration: 0.8, ease: "easeInOut" }}
       viewport={{ once: true }}
       ref={ref}
-      className="horizontal-page-padding relative pb-14 sm:pb-20 md:pb-24 lg:pb-32"
+      className="horizontal-page-padding relative mt-10 pb-14 sm:pb-20 md:pb-24 lg:pb-32"
     >
       {/* text container */}
       <div className="lg:absolute lg:w-1/4">

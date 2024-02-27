@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-import SelectedProjectsCarousel from "../../../components/selectedProjectsCarousel/selectedProjectsCarousel";
 import { selectedProjData } from "./content/projectsSectionContent";
-import FavoriteProjectsCarousel from "../../../components/favoriteProjectsCarousel/FavoriteProjectsCarousel";
+import FavoriteProjectsCarousel from "../../../shared/favoriteProjectsCarousel/FavoriteProjectsCarousel";
 
 const ProjectsSection = () => {
   const enterAnimationVariants = {

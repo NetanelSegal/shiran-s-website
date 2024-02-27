@@ -1,10 +1,20 @@
 import { motion, useMotionValue } from "framer-motion";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { apiGet } from "../../utils/apiRequests";
+import { urls } from "../../constants/urls";
 const DRAG_DISTANCE = 30;
 
 const FavoriteProjectsCarousel = ({ projects }) => {
-  projects = [...projects, projects[0]];
+  const nav = useNavigate();
+
+  // data fetching
+  const getFavProjects = async () => {
+    const { data } = await apiGet(urls.projects);
+    console.log(data);
+  };
+
+  // animation & interaction
   const [currProjectIndex, setCurrProjectIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -95,7 +105,12 @@ const FavoriteProjectsCarousel = ({ projects }) => {
           >
             <i className="fa-solid fa-arrow-left"></i>
           </button>
-          <button className="my-btn-secondary btn-effect">עוד פרוייקטים</button>
+          <button
+            onClick={() => nav("/projects")}
+            className="my-btn-secondary btn-effect"
+          >
+            עוד פרוייקטים
+          </button>
         </div>
       </div>
     </div>

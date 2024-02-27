@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ParallaxEffect from "../../shared/parallaxEffect/ParallaxEffect";
 import { urls } from "../../constants/urls";
 
-const Project = ({ data, i }) => {
+const Project = ({ catsObj, data, i }) => {
   const nav = useNavigate();
   const textContainerVariants = {
     fromRight: {
@@ -90,21 +90,26 @@ const Project = ({ data, i }) => {
           variants={textContainerVariants}
           className="flex flex-wrap gap-1"
         >
-          {/* {data.tags.map((tag) => (
+          {data.categories.map((catCode) => (
             <motion.p
               variants={textContainerVariants}
-              key={tag + i}
-              className="my-bg-secondary rounded-lg px-3
+              key={catCode + i}
+              className="my-bg-secondary my-1 rounded-lg px-3
           py-1 text-sm font-semibold"
             >
-              {tag}
+              {catsObj[catCode]}
             </motion.p>
-          ))} */}
+          ))}
         </motion.div>
         <motion.p variants={textContainerVariants}>
           <strong>תיאור הפרוייקט: </strong>
           {data.description} <br />
-          <Link className="font-semibold underline">עוד על הפרויקט</Link>
+          <Link
+            to={`/projects/${data._id}`}
+            className="font-semibold underline"
+          >
+            עוד על הפרויקט
+          </Link>
         </motion.p>
       </motion.div>
     </div>
