@@ -19,10 +19,13 @@ const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
   };
 
   const initialImagePath = {
-    mainImage: imagesData.mainImage
-      ? `${urls.assets}/${imagesData.mainImage}`
+    mainImage: imagesData?.mainImage
+      ? `${urls.assets}/${imagesData?.mainImage}`
       : "",
-    images: imagesData.images.map((imgPath) => `${urls.assets}/${imgPath}`),
+    images:
+      imagesData?.images?.map((imgPath) => `${urls.assets}/${imgPath}`) || [],
+    plans:
+      imagesData?.plans?.map((imgPath) => `${urls.assets}/${imgPath}`) || [],
   };
 
   const [imagesDisplayPath, setImagesDisplayPath] = useState(initialImagePath);
@@ -35,7 +38,7 @@ const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
       // first delete is needed
       let deleteData = {};
       deleteData.mainImage = await deleteMainImageApi();
-      deleteData.images = await deleteImgFromImgsApi();
+      deleteData.plansAndImages = await deleteImgFromImgsApi();
       console.log("deleteData: ", deleteData);
 
       // upload images after delete
@@ -45,7 +48,12 @@ const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
         fd.append("projectImgs", image);
       });
 
+      filesToUpload?.plans?.forEach((image) => {
+        fd.append("projectPlans", image);
+      });
+
       const { data } = await apiPost(`${urls.uploadImgs}/${id}`, fd);
+      console.log(data);
       getProjects();
     } catch (err) {
       console.log("error: ", err);
@@ -70,14 +78,15 @@ const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
   };
 
   const deleteImgFromImgsApi = async () => {
-    if (!imgsToDeleteData?.images) {
-      return console.log("no image data to delete from images");
+    if (!imgsToDeleteData?.images && !imgsToDeleteData?.plans) {
+      return console.log("no image or plan data to delete from project");
     }
-
+    const body = {
+      imagesToDelete: imgsToDeleteData.images || false,
+      plansToDelete: imgsToDeleteData.plans || false,
+    };
     try {
-      const { data } = await apiPost(`${urls.deleteProjectImages}/${id}`, {
-        imagesToDelete: imgsToDeleteData.images,
-      });
+      const { data } = await apiPost(`${urls.deleteProjectImages}/${id}`, body);
       return data;
     } catch (err) {
       if (err.response.data) {
@@ -88,18 +97,24 @@ const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
     }
   };
 
-  const deleteImgFromImgsState = (imgPath) => {
+  const deleteImgFromImgsState = (imgPath, e) => {
+    const fieldToDeleteFrom =
+      e.target.name == "btnDeleteImages" ? "images" : "plans";
+
+    console.log(fieldToDeleteFrom);
     setImagesDisplayPath((prev) => ({
       ...prev,
-      images: prev.images.filter((img) => img != imgPath),
+      [fieldToDeleteFrom]: prev[fieldToDeleteFrom].filter(
+        (img) => img != imgPath,
+      ),
     }));
 
     if (isImgFromDB(imgPath)) {
       setImgsToDeleteData((prev) => {
         return {
           ...prev,
-          images: prev?.images
-            ? [...prev.images, imgPath.split("/assets/")[1]]
+          [fieldToDeleteFrom]: prev?.[fieldToDeleteFrom]
+            ? [...prev[fieldToDeleteFrom], imgPath.split("/assets/")[1]]
             : [imgPath.split("/assets/")[1]],
         };
       });
@@ -122,16 +137,13 @@ const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
         ...prev,
         mainImage: URL.createObjectURL(e.target.files[0]),
       }));
+
       setFilesToUpload((prev) => ({ ...prev, mainImage: e.target.files[0] }));
-    } else {
-      setImagesDisplayPath((prev) => {
-        const imagesDisplayPath = prev.images;
-        imagesDisplayPath.push(URL.createObjectURL(e.target.files[0]));
-        return {
-          ...prev,
-          images: imagesDisplayPath,
-        };
-      });
+    } else if (e.target.id == "imagesInput") {
+      setImagesDisplayPath((prev) => ({
+        ...prev,
+        images: [...prev.images, URL.createObjectURL(e.target.files[0])],
+      }));
 
       setFilesToUpload((prev) => {
         const imagesFiles = prev?.images
@@ -139,8 +151,26 @@ const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
           : [e.target.files[0]];
         return { ...prev, images: imagesFiles };
       });
+    } else if (e.target.id == "plansInput") {
+      setImagesDisplayPath((prev) => ({
+        ...prev,
+        plans: [...prev.plans, URL.createObjectURL(e.target.files[0])],
+      }));
+
+      setFilesToUpload((prev) => {
+        const plansFiles = prev?.plans
+          ? [...prev.plans, e.target.files[0]]
+          : [e.target.files[0]];
+        return { ...prev, plans: plansFiles };
+      });
     }
   };
+
+  // useEffect(() => {
+  //   console.log("imagesDisplayPath: ", imagesDisplayPath);
+  //   console.log("imgsToDeleteData: ", imgsToDeleteData);
+  //   console.log("filesToUpload: ", filesToUpload);
+  // }, [imagesDisplayPath, imgsToDeleteData, filesToUpload]);
 
   return (
     <div className="fixed inset-0 z-20 flex items-center justify-center backdrop-blur-[2px]">
@@ -181,41 +211,83 @@ const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
           )}
         </div>
         {/* images container */}
-        <div className="my-2 flex gap-2 rounded-xl border-2 border-black p-5">
-          {imagesDisplayPath?.images.map((e) => (
-            <div key={e} className="relative">
-              <img
-                name={e}
-                className="aspect-video w-[200px] rounded-md object-cover"
-                src={e}
-                alt=""
+        <div className="my-2 rounded-xl border-2 border-black p-5">
+          <p>תמונות פרוייקט</p>
+          <div className="mt-2 flex gap-2">
+            {imagesDisplayPath?.images.map((p) => (
+              <div key={p} className="relative">
+                <img
+                  name={p}
+                  className="aspect-video w-[200px] rounded-md object-cover"
+                  src={p}
+                  alt=""
+                />
+                <button
+                  name="btnDeleteImages"
+                  onClick={(e) => {
+                    deleteImgFromImgsState(p, e);
+                  }}
+                  className="absolute bottom-2  right-2 rounded-sm bg-red-500 p-0 px-2"
+                >
+                  מחיקה
+                </button>
+              </div>
+            ))}
+            {/* add image button */}
+            <label
+              id="images"
+              className="flex  aspect-video w-[200px] items-center justify-center rounded-md border-2 border-black bg-slate-200 text-2xl"
+            >
+              <input
+                onClick={(e) => (e.target.value = null)}
+                onChange={addImageToState}
+                className="uploadImage"
+                type="file"
+                name=""
+                id="imagesInput"
               />
-              <button
-                onClick={() => {
-                  deleteImgFromImgsState(e);
-                }}
-                className="absolute bottom-2  right-2 rounded-sm bg-red-500 p-0 px-2"
-              >
-                מחיקה
-                {/* <i className="fa-solid fa-xmark"></i> */}
-              </button>
-            </div>
-          ))}
-          {/* add image button */}
-          <label
-            id="images"
-            className="flex  aspect-video w-[200px] items-center justify-center rounded-md border-2 border-black bg-slate-200 text-2xl"
-          >
-            <input
-              onClick={(e) => (e.target.value = null)}
-              onChange={addImageToState}
-              className="uploadImage"
-              type="file"
-              name=""
-              id="imagesInput"
-            />
-            <i className="fa-solid fa-plus"></i>
-          </label>
+              <i className="fa-solid fa-plus"></i>
+            </label>
+          </div>
+        </div>
+        <div className="my-2 rounded-xl border-2 border-black p-5">
+          <p>תוכניות</p>
+          <div className="mt-2 flex gap-2">
+            {imagesDisplayPath?.plans?.map((p) => (
+              <div key={p} className="relative">
+                <img
+                  name={p}
+                  className="aspect-video w-[200px] rounded-md object-cover"
+                  src={p}
+                  alt=""
+                />
+                <button
+                  name="btnDeletePlans"
+                  onClick={(e) => {
+                    deleteImgFromImgsState(p, e);
+                  }}
+                  className="absolute bottom-2  right-2 rounded-sm bg-red-500 p-0 px-2"
+                >
+                  מחיקה
+                </button>
+              </div>
+            ))}
+            {/* add image button */}
+            <label
+              id="images"
+              className="flex  aspect-video w-[200px] items-center justify-center rounded-md border-2 border-black bg-slate-200 text-2xl"
+            >
+              <input
+                onClick={(e) => (e.target.value = null)}
+                onChange={addImageToState}
+                className="uploadImage"
+                type="file"
+                name=""
+                id="plansInput"
+              />
+              <i className="fa-solid fa-plus"></i>
+            </label>
+          </div>
         </div>
         {/* buttons container */}
         <div className="flex justify-end gap-2">

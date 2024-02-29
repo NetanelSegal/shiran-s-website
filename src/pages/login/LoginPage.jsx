@@ -2,11 +2,12 @@ import Form from "../../shared/form/Form";
 import Joi from "joi";
 import { urls } from "../../constants/urls";
 import { apiPost } from "../../utils/apiRequests";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const [loginError, setLoginError] = useState();
   const { user, setUser } = useContext(UserContext);
   const nav = useNavigate();
 
@@ -33,12 +34,18 @@ const LoginPage = () => {
   });
 
   const login = async (formData) => {
+    setLoginError();
     try {
       const { data } = await apiPost(urls.login, formData);
       setUser(data.user);
       nav("/");
     } catch (err) {
-      console.log(err.response.data);
+      if (err.response.status == 401) {
+        setLoginError("סיסמה שגויה");
+      } else if (err.response.status == 404) {
+        setLoginError("כתובת מייל לא רשומה במערכת");
+      }
+      console.log(err);
     }
   };
 
@@ -52,6 +59,7 @@ const LoginPage = () => {
           joiSchema={joiSchema}
         />
       </div>
+      {loginError && <p className="font-semibold text-red-500">{loginError}</p>}
     </div>
   );
 };

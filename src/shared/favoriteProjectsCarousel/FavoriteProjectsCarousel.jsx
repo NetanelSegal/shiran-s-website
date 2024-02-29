@@ -1,17 +1,23 @@
 import { motion, useMotionValue } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet } from "../../utils/apiRequests";
 import { urls } from "../../constants/urls";
 const DRAG_DISTANCE = 30;
 
-const FavoriteProjectsCarousel = ({ projects }) => {
+const FavoriteProjectsCarousel = () => {
+  const [projects, setProjects] = useState([]);
   const nav = useNavigate();
 
   // data fetching
   const getFavProjects = async () => {
-    const { data } = await apiGet(urls.projects);
-    console.log(data);
+    try {
+      const { data } = await apiGet(urls.favProjects);
+      console.log(data);
+      setProjects(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // animation & interaction
@@ -46,8 +52,21 @@ const FavoriteProjectsCarousel = ({ projects }) => {
     }
   };
 
+  useEffect(() => {
+    getFavProjects();
+  }, []);
+
+  useEffect(() => {
+    console.log(projects);
+  }, [projects]);
+
+  if (!projects.length) {
+    return;
+  }
+
   return (
-    <div className="w-full">
+    <div className="w-full py-5">
+      <h3 className="mb-5">פרוייקטים נבחרים</h3>
       <motion.div
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
@@ -80,7 +99,7 @@ const FavoriteProjectsCarousel = ({ projects }) => {
               draggable="false"
               width="100%"
               className="object-cover transition-all duration-300 ease-in-out hover:scale-125"
-              src={data.img}
+              src={`${urls.assets}/${data.mainImage}`}
               alt=""
               key={i}
             />

@@ -2,6 +2,7 @@ const MAIN_URL = "http://localhost:3001"
 
 export const urls = {
     projects: MAIN_URL + "/projects",
+    favProjects: MAIN_URL + "/projects/favourites",
     singleProject: MAIN_URL + "/projects/single",
     updateProject: MAIN_URL + "/projects",
     uploadImgs: MAIN_URL + "/projects/uploadImgs",

@@ -23,6 +23,7 @@ const AppRoutes = () => {
   if (isLoading) {
     return <PageLoader />;
   }
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

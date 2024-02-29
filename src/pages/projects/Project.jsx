@@ -1,11 +1,12 @@
-import { motion } from "framer-motion";
-import React, { useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ParallaxEffect from "../../shared/parallaxEffect/ParallaxEffect";
 import { urls } from "../../constants/urls";
 
 const Project = ({ catsObj, data, i }) => {
   const nav = useNavigate();
+
   const textContainerVariants = {
     fromRight: {
       opacity: 0,
@@ -53,23 +54,25 @@ const Project = ({ catsObj, data, i }) => {
   return (
     <div ref={projectContainerRef} className={className}>
       {/* image containers */}
-      <motion.div
-        variants={imgVariants}
-        initial={i % 2 == 0 ? "fromRight" : "fromLeft"}
-        whileInView="to"
-        viewport={{ once: true }}
-        className="z-20 aspect-video overflow-hidden rounded-xl lg:w-2/3"
-      >
-        <ParallaxEffect stiffness={"-50%"} parentRef={projectContainerRef}>
-          <img
-            onClick={() => nav(`/projects/${data._id}`)}
-            className="h-[150%] w-full cursor-pointer object-cover transition-all duration-300  ease-in-out
+      <AnimatePresence>
+        <motion.div
+          variants={imgVariants}
+          initial={i % 2 == 0 ? "fromRight" : "fromLeft"}
+          whileInView={"to"}
+          viewport={{ once: true }}
+          className="z-20 aspect-video overflow-hidden rounded-xl lg:w-2/3"
+        >
+          <ParallaxEffect stiffness={"-50%"} parentRef={projectContainerRef}>
+            <img
+              onClick={() => nav(`/projects/${data._id}`)}
+              className="h-[150%] w-full cursor-pointer object-cover transition-all duration-300  ease-in-out
         hover:scale-125"
-            src={`${urls.assets}/${data.mainImage}`}
-            alt={"Project " + data.title + " image"}
-          />
-        </ParallaxEffect>
-      </motion.div>
+              src={`${urls.assets}/${data.mainImage}`}
+              alt={"Project " + data.title + " image"}
+            />
+          </ParallaxEffect>
+        </motion.div>
+      </AnimatePresence>
       {/* text containers */}
 
       <motion.div
@@ -77,7 +80,7 @@ const Project = ({ catsObj, data, i }) => {
         initial={i % 2 == 0 ? "fromRight" : "fromLeft"}
         whileInView="to"
         viewport={{ once: true }}
-        className="lg:w-1/3"
+        className="my-2 lg:w-1/3"
       >
         <motion.h4 variants={textContainerVariants} className="font-semibold">
           {data.title}
@@ -88,13 +91,13 @@ const Project = ({ catsObj, data, i }) => {
         </motion.p>
         <motion.div
           variants={textContainerVariants}
-          className="flex flex-wrap gap-1"
+          className="my-1 flex flex-wrap gap-1"
         >
           {data.categories.map((catCode) => (
             <motion.p
               variants={textContainerVariants}
               key={catCode + i}
-              className="my-bg-secondary my-1 rounded-lg px-3
+              className="my-bg-secondary rounded-lg px-3
           py-1 text-sm font-semibold"
             >
               {catsObj[catCode]}

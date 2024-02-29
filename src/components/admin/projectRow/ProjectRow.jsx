@@ -137,7 +137,11 @@ const ProjectRow = ({ data, catsObj }) => {
             {isImgsMenuOpen && (
               <ImagesMenu
                 id={data._id}
-                imagesData={{ mainImage: data.mainImage, images: data.images }}
+                imagesData={{
+                  mainImage: data.mainImage,
+                  images: data.images,
+                  plans: data.plans,
+                }}
                 handleIsOpen={handleImgsMenu}
               />
             )}
