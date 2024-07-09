@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import ComponentLoader from "../../loaders/ComponentLoader";
 
 const FooterForm = () => {
+  const btnSendRef = useRef();
+  const [statusMessage, setStatusMessage] = useState("שלח");
+
+  const [isLoading, setIsLoading] = useState(false);
   const feilds = ["name", "phoneNumber", "email"];
   const autoCompletes = ["name", "tel", "email"];
 
@@ -28,8 +34,46 @@ const FooterForm = () => {
 
   const watchedData = useWatch({ control });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+
+    try {
+      console.log(data);
+      const res = await emailjs.send(
+        "service_qowi0kn",
+        "shiran_contact_form",
+        data,
+        {
+          publicKey: "6CI1z7b1xE3KIliQo",
+        },
+      );
+      if (res.status == 200) {
+        setStatusMessage("הטופס נשלח בהצלחה");
+        btnSendRef.current.classList.remove("my-btn-secondary");
+        btnSendRef.current.classList.add("bg-green-500");
+
+        setTimeout(() => {
+          setStatusMessage("שלח");
+          btnSendRef.current.classList.remove("bg-green-500");
+          btnSendRef.current.classList.add("my-btn-secondary");
+        }, 2500);
+      }
+
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setStatusMessage("שגיאה בשליחת הטופס");
+      btnSendRef.current.classList.remove("my-btn-secondary");
+      btnSendRef.current.classList.add("bg-red-500");
+
+      setTimeout(() => {
+        setStatusMessage("שלח");
+        btnSendRef.current.classList.remove("bg-red-500");
+        btnSendRef.current.classList.add("my-btn-secondary");
+      }, 2500);
+
+      setIsLoading(false);
+    }
   };
 
   // animation
@@ -113,11 +157,12 @@ const FooterForm = () => {
             rows="10"
           ></textarea>
           <button
+            ref={btnSendRef}
             className={`my-btn-secondary btn-effect w-full hover:bg-[#ccbebc] hover:text-black hover:after:left-full`}
             type="submit"
             form="footerForm"
           >
-            שלח
+            {isLoading ? <ComponentLoader /> : statusMessage}
           </button>
         </div>
       </div>

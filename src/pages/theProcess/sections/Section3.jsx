@@ -1,5 +1,6 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
+import BoldParagraph from "../../../components/BoldParagraph";
 
 const Section2 = () => {
   const ref = useRef(null);
@@ -27,13 +28,19 @@ const Section2 = () => {
     >
       {/* text container */}
       <div className="lg:absolute lg:w-1/4">
-        <h3>תכנון המבנה והכנת הדמייה</h3>
+        <h3 className="mb-2 font-semibold">תכנון המבנה</h3>
         <p>
-          תכנון אדריכלי זהו תהליך רב שלבי בו בודקים האם וכיצד ניתן לבנות או לשפץ
-          את המבנה שלכם. התהליך מתחיל בבדיקת אישורי הבנייה ומסתיים בתוכנית
-          אדריכלית מקיפה הכוללת שרטוטים ולעיתים גם הדמיות.
+          נתחיל בבדיקת זכויות הבניה שקיבלנו בתיק המידע, כגון: מספר הקומות ושטחי
+          הבנייה המותרים וכו'. נכין סקיצות בהתאם לפרוגרמה שנקבעה בפגישה הראשונה.
+          שלב זה ילווה
+          <BoldParagraph text={" בסקיצות מפורטות "} />
+          ללא הגבלה, שבהן נתכנן בקפידה חלל חלל בדיוק לצרכים שלכם, נתכנן אזורי
+          אחסון נוחים, מקלחות וכו. בסוף שלב זה נייצר הדמיה
+          <BoldParagraph text={" תלת מימדית "} />
+          להבנת התכנון והפרופורציות בחלל.
         </p>
       </div>
+
       {/* svg container */}
       <div className="w-full pb-10 pt-20">
         <svg overflow="visible" viewBox="0 0 1913.5 636.52">
@@ -111,7 +118,7 @@ const Section2 = () => {
             <path
               d="M311.53,161.81a34,34,0,1,0,34,34,34,34,0,0,0-34-34h0"
               transform="translate(0)"
-              fill="#e9d8c9"
+              fill="#fff"
             />
             <path
               d="M170.85,493.79v70.46a10,10,0,0,0,10,10H437.56a10,10,0,0,0,10-10V493.79a10,10,0,0,0-10-10H180.83a10,10,0,0,0-10,10h0"

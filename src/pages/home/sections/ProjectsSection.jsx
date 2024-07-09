@@ -21,13 +21,10 @@ const ProjectsSection = () => {
         className="mb-5 items-end gap-2"
       >
         <motion.h2 variants={enterAnimationVariants} className="font-bold">
-          בונה חלומות
+          הפרוייקטים שלנו
         </motion.h2>
-        <motion.h5 variants={enterAnimationVariants}>
-          הפרוייקטים מנצחים שלי
-        </motion.h5>
+        <FavoriteProjectsCarousel projects={selectedProjData} />
       </motion.div>
-      <FavoriteProjectsCarousel projects={selectedProjData} />
     </section>
   );
 };

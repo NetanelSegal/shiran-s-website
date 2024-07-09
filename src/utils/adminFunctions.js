@@ -35,6 +35,10 @@ const joiProjectSchema = Joi.object({
         "number.min": "שטח הבנייה חייב להיות לפחות 10",
         "number.max": "שטח הבנייה יכול להיות במרבית 1500",
     }),
+    mainImage: Joi.string().allow(null, ""),
+    images: Joi.array().items(Joi.string()),
+    plans: Joi.array().items(Joi.string()),
+    favourite: Joi.boolean().allow(null),
 });
 
 const validateFormData = (data) => {
@@ -46,16 +50,14 @@ const validateFormData = (data) => {
         error.details.forEach((detail) => {
             validationErrors[detail.context.label] = detail.message;
         });
-
-        throw validationErrors
-        return false;
+        return { error: validationErrors }
     }
     return true;
 };
 
 export const updateProject = async (pData, id) => {
     const isValid = validateFormData(pData);
-    if (isValid) {
+    if (!isValid.error) {
         try {
             const { data } = await apiPut(`${urls.projects}/${id}`, pData);
             return data
@@ -63,7 +65,6 @@ export const updateProject = async (pData, id) => {
             throw (error);
         }
     } else {
-        throw ("Form is invalid")
-        // console.log("Form is invalid");
+        throw (isValid.error)
     }
 };

@@ -57,7 +57,7 @@ a {
 }
 p,
 span {
-  @apply text-base;
+  @apply text-base leading-tight;
 }
 
 /* buttons */
@@ -138,7 +138,7 @@ button {
 }
 
 .section {
-  @apply py-14 sm:py-20 md:py-24 lg:py-32;
+  @apply bg-white py-14 sm:py-20 md:py-24 lg:py-32;
 }
 
 .radio-label:has(input[type="radio"]:checked) {

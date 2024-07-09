@@ -93,7 +93,7 @@ const Project = ({ catsObj, data, i }) => {
           variants={textContainerVariants}
           className="my-1 flex flex-wrap gap-1"
         >
-          {data.categories.map((catCode) => (
+          {data.categories?.map((catCode) => (
             <motion.p
               variants={textContainerVariants}
               key={catCode + i}

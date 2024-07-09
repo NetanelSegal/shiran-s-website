@@ -1,13 +1,11 @@
 import { motion } from "framer-motion";
 import { useContext, useEffect, useRef, useState } from "react";
 import AnimatedProcessPath from "../../../components/theProcess/AnimatedProcessPath";
-import {
-  mainHeading,
-  content as pageContent,
-} from "./content/processSectionContent";
+import { content as pageContent } from "./content/processSectionContent";
 import SvgShape from "../../../components/theProcess/SvgShape";
 import { AppContext } from "../../../context/AppContext";
 import { useNavigate } from "react-router-dom";
+import TimeOfStep from "../../../components/timeOfStep/TimeOfStep";
 
 const ProcessSection = () => {
   const nav = useNavigate();
@@ -59,71 +57,169 @@ const ProcessSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="horizontal-page-padding  relative overflow-hidden pt-14"
+      className="horizontal-page-padding relative overflow-hidden bg-white pt-14"
     >
       <motion.div
         whileInView="to"
         initial="from"
         variants={enterAnimationVariants}
         viewport={{ once: true }}
-        className="mb-5 text-center"
+        className="mb-10 text-right"
       >
-        <h2 className="font-bold">{mainHeading}</h2>
+        <h3 className="font-bold">איך נראה תהליך אדריכלתי מתחילתו ועד סופו?</h3>
+        <h4>הנה חמישה שלבים עיקריים</h4>
       </motion.div>
-      {pageContent.map((eContent, i) => (
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, ease: "backIn" }}
-          viewport={{ once: true }}
-          onAnimationComplete={() => setIsAnimationComplete(true)}
-          key={eContent.heading}
-          className={"my-16 " + i == pageContent.length - 1 ? "mb-0" : ""}
-        >
+      {/* שיחת תיאום ציפיות */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "backIn" }}
+        viewport={{ once: true }}
+        onAnimationComplete={() => setIsAnimationComplete(true)}
+        key={pageContent[0].heading}
+        className="relative z-20 my-16"
+      >
+        <div className="relative mb-28 w-96 max-w-[50%]">
+          <h4 className="mb-1 font-semibold">{pageContent[0].heading}</h4>
+          <p className="leading-tight">{pageContent[0].text}</p>
           <div
-            className={
-              i == 0
-                ? "relative mb-28 w-96 max-w-[50%]"
-                : i % 2 == 1
-                  ? "relative my-28 mr-auto w-96 max-w-[50%]"
-                  : "relative my-28 w-96 max-w-[50%]"
-            }
+            ref={(e) => (svgContainerRef.current[0] = e)}
+            className="absolute right-full top-1/2 "
           >
-            <h4 className="font-semibold">{eContent.heading}</h4>
-            <p>{eContent.text}</p>
-            {i == pageContent.length - 1 && (
-              <button
-                onClick={() => nav("/the-process")}
-                className="my-btn-primary btn-effect my-2"
-              >
-                עוד על התהליך
-              </button>
-            )}
-            <div
-              ref={(e) => (svgContainerRef.current[i] = e)}
-              className={
-                i % 2 == 1
-                  ? i == 3
-                    ? "absolute -right-14 top-1/2 -z-20"
-                    : "absolute -right-10 top-1/2 -z-20 "
-                  : i == 4
-                    ? "absolute right-full top-1/3 -z-20 "
-                    : "absolute right-full top-1/2 -z-20 "
-              }
-            >
-              <SvgShape
-                areInView={areInView}
-                setAreInView={setAreInView}
-                key={i}
-                i={i}
-              />
-            </div>
+            <SvgShape
+              areInView={areInView}
+              setAreInView={setAreInView}
+              key={0}
+              i={0}
+            />
           </div>
-        </motion.div>
-      ))}
-      <div className="text-center"></div>
+        </div>
+      </motion.div>
+      {/* הפקת תיק מידע */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "backIn" }}
+        viewport={{ once: true }}
+        onAnimationComplete={() => setIsAnimationComplete(true)}
+        key={pageContent[1].heading}
+        className="relative  z-20 my-16"
+      >
+        <div className="relative my-28 mr-auto w-96 max-w-[50%]">
+          <div className="mb-1 flex flex-col items-start gap-1 sm:flex-row sm:items-end">
+            <h4 className="font-semibold">{pageContent[1].heading}</h4>
+            <TimeOfStep time={pageContent[1].time} />
+          </div>
+          <p className="leading-tight">{pageContent[1].text}</p>
+          <div
+            ref={(e) => (svgContainerRef.current[1] = e)}
+            className="absolute -right-10 top-1/2"
+          >
+            <SvgShape
+              areInView={areInView}
+              setAreInView={setAreInView}
+              key={0}
+              i={1}
+            />
+          </div>
+        </div>
+      </motion.div>
+      {/* תכנון המבנה */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "backIn" }}
+        viewport={{ once: true }}
+        onAnimationComplete={() => setIsAnimationComplete(true)}
+        key={pageContent[2].heading}
+        className="relative  z-20 my-16"
+      >
+        <div className="relative mb-28 w-96 max-w-[50%]">
+          <div className="mb-1 flex flex-col items-start gap-1 sm:flex-row sm:items-end">
+            <h4 className="font-semibold">{pageContent[2].heading}</h4>
+            <TimeOfStep time={pageContent[2].time} />
+          </div>
+          <p className="leading-tight">{pageContent[2].text}</p>
+          <div
+            ref={(e) => (svgContainerRef.current[2] = e)}
+            className="absolute right-full top-1/2 "
+          >
+            <SvgShape
+              areInView={areInView}
+              setAreInView={setAreInView}
+              key={0}
+              i={2}
+            />
+          </div>
+        </div>
+      </motion.div>
+      {/* הגשת התוכניות לוועדה */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "backIn" }}
+        viewport={{ once: true }}
+        onAnimationComplete={() => setIsAnimationComplete(true)}
+        key={pageContent[3].heading}
+        className="relative  z-20 my-16"
+      >
+        <div className="relative my-28 mr-auto w-96 max-w-[50%]">
+          <div className="mb-1 flex flex-col items-start gap-1 sm:flex-row sm:items-end">
+            <h4 className="font-semibold">{pageContent[3].heading}</h4>
+            <TimeOfStep time={pageContent[3].time} />
+          </div>
+
+          <p className="leading-tight">{pageContent[3].text}</p>
+          <div
+            ref={(e) => (svgContainerRef.current[3] = e)}
+            className="absolute -right-14 top-1/2"
+          >
+            <SvgShape
+              areInView={areInView}
+              setAreInView={setAreInView}
+              key={0}
+              i={3}
+            />
+          </div>
+        </div>
+      </motion.div>
+      {/* בנייה */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "backIn" }}
+        viewport={{ once: true }}
+        onAnimationComplete={() => setIsAnimationComplete(true)}
+        key={pageContent[4].heading}
+        className="relative  z-20 my-16"
+      >
+        <div className="relative z-50 mb-28 w-96 max-w-[50%]">
+          <div className="mb-1 flex flex-col items-start gap-1 sm:flex-row sm:items-end">
+            <h4 className="font-semibold">{pageContent[4].heading}</h4>
+            <TimeOfStep time={pageContent[4].time} />
+          </div>
+          <p className="leading-tight">{pageContent[4].text}</p>
+          <button
+            onClick={() => nav("/the-process")}
+            className="my-btn-primary btn-effect my-2"
+          >
+            עוד על התהליך
+          </button>
+          <div
+            ref={(e) => (svgContainerRef.current[4] = e)}
+            className="absolute right-full top-1/2 "
+          >
+            <SvgShape
+              areInView={areInView}
+              setAreInView={setAreInView}
+              key={0}
+              i={4}
+            />
+          </div>
+        </div>
+      </motion.div>
       <svg
-        className="absolute inset-0 -z-30"
+        className="absolute inset-0 z-0"
         width="100%"
         height="100%"
         preserveAspectRatio="xMidYMax meet"

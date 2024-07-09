@@ -1,6 +1,7 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect } from "react";
 import { useRef } from "react";
+import BoldParagraph from "../../../components/BoldParagraph";
 
 const Section1 = () => {
   const ref = useRef(null);
@@ -27,11 +28,20 @@ const Section1 = () => {
       className="horizontal-page-padding relative mt-10 pb-14 sm:pb-20 md:pb-24 lg:pb-32"
     >
       {/* text container */}
-      <div className="lg:absolute lg:w-1/4">
-        <h3>שיחת היכרות </h3>
-        <p>
-          פגישה בה האדריכל אוסף מידע על השימוש והצרכים של הלקוח וככה הוא מסיק
-          מסקנות לגבי תכנון הבית וכו
+      <div className=" lg:absolute lg:w-1/4">
+        <h3 className="mb-2 font-semibold">שיחת תיאום ציפיות </h3>
+        <p className="leading-tight">
+          לאחר שהחלטנו להמשיך יחד, השלב הראשון הוא
+          <BoldParagraph text={" הבנת הצרכים "} />
+          של בני הבית. נמלא יחד פרוגרמה שתפרט את הדברים שחשובים לכם בתכון הבית,
+          כגון: מה יראו כשנכנסים הביתה, האם הילדים יהיו בחדר ביחד, צריך משרד
+          ביתי או לא, נרד עד לפרטים
+          <BoldParagraph text={" הכי קטנים "} />
+          של האופן בו אתם חיים. נמשיך לשלב לא פחות חשוב שהוא
+          <BoldParagraph text={" ניהול תקציב "} />, נבין בדיוק מה המצב הנתון,
+          ואם צריך לגייס כספים נוספים, טיפול במשכנתא וכו' ונעשה התאמה בין בית
+          החלומות שלכם לתקציב הנתון כדי שנצא לדרך
+          <BoldParagraph text={" ובלי הפתעות כלכליות"} />.
         </p>
       </div>
       {/* svg container */}

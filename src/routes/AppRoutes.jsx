@@ -18,7 +18,7 @@ import AddProjectPage from "../pages/admin/AddProjectPage.jsx";
 
 const AppRoutes = () => {
   const { user } = useContext(UserContext);
-  const { setIsLoading, isLoading, projectsData } = useContext(AppContext);
+  const { isLoading, projectsData } = useContext(AppContext);
 
   if (isLoading) {
     return <PageLoader />;
@@ -34,7 +34,7 @@ const AppRoutes = () => {
         <Route path="login" element={<LoginPage />} />
         <Route path="signup" element={<SignupPage />} />
         <Route path="projects" element={<ProjectsPage />} />
-        {projectsData.map((p) => (
+        {projectsData?.map((p) => (
           <Route
             key={p._id}
             path={`projects/${p._id}`}
@@ -47,7 +47,7 @@ const AppRoutes = () => {
         {(user?.role === "admin" || user?.role === "developer") && (
           <>
             <Route path="admin" element={<AdminPage />} />
-            {projectsData.map((p) => (
+            {projectsData?.map((p) => (
               <Route
                 key={p._id}
                 path={`admin/edit-project/:id`}

@@ -1,6 +1,6 @@
 import { motion, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { apiGet } from "../../utils/apiRequests";
 import { urls } from "../../constants/urls";
 const DRAG_DISTANCE = 30;
@@ -13,7 +13,6 @@ const FavoriteProjectsCarousel = () => {
   const getFavProjects = async () => {
     try {
       const { data } = await apiGet(urls.favProjects);
-      console.log(data);
       setProjects(data);
     } catch (error) {
       console.log(error);
@@ -56,17 +55,13 @@ const FavoriteProjectsCarousel = () => {
     getFavProjects();
   }, []);
 
-  useEffect(() => {
-    console.log(projects);
-  }, [projects]);
-
   if (!projects.length) {
     return;
   }
 
   return (
-    <div className="w-full py-5">
-      <h3 className="mb-5">פרוייקטים נבחרים</h3>
+    <div className="w-full">
+      <h3 className="mb-5">הפרוייקטים המנצחים</h3>
       <motion.div
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
@@ -96,6 +91,7 @@ const FavoriteProjectsCarousel = () => {
             className="aspect-video w-full shrink-0 cursor-pointer overflow-hidden rounded-xl"
           >
             <img
+              onClick={() => nav(`/projects/${data._id}`)}
               draggable="false"
               width="100%"
               className="object-cover transition-all duration-300 ease-in-out hover:scale-125"
@@ -107,7 +103,7 @@ const FavoriteProjectsCarousel = () => {
         ))}
       </motion.div>
       {/* buttons container */}
-      <div className="flex flex-col items-center justify-end gap-1 sm:flex-row">
+      <div className="flex flex-col items-center justify-end gap-1 pb-2 sm:flex-row">
         <div className="my-bg-primary w-full grow flex-row self-stretch rounded-xl py-1 pl-4 pr-4 text-white sm:w-auto">
           <h6>{projects[currProjectIndex].title}</h6>
         </div>

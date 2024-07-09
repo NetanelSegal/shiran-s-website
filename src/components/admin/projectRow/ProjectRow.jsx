@@ -1,9 +1,9 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { urls } from "../../../constants/urls";
 import ImagesMenu from "../imagesMenu/ImagesMenu.jsx";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { updateProject } from "../../../utils/adminFunctions.js";
-import { apiDelete } from "../../../utils/apiRequests.js";
+import { apiDelete, apiGet } from "../../../utils/apiRequests.js";
 import { AppContext } from "../../../context/AppContext.jsx";
 
 const ProjectRow = ({ data, catsObj }) => {
@@ -17,9 +17,13 @@ const ProjectRow = ({ data, catsObj }) => {
   };
 
   const getProjects = async () => {
-    const { data } = await apiGet(urls.projects);
-    setProjectsData(data);
-    setIsLoading(false);
+    try {
+      const { data } = await apiGet(urls.projects);
+      setProjectsData(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleDelete = async () => {
@@ -34,6 +38,7 @@ const ProjectRow = ({ data, catsObj }) => {
       console.log(data);
       getProjects();
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -68,7 +73,7 @@ const ProjectRow = ({ data, catsObj }) => {
       const data = await updateProject(body, _id);
       console.log(data);
     } catch (error) {
-      console.error(error);
+      console.log("validation error: ", error);
     }
   };
 
@@ -83,12 +88,18 @@ const ProjectRow = ({ data, catsObj }) => {
   return (
     <>
       <tr valign="top" className="border-b-2 text-right">
-        <th className="border-l-2 border-r-2 p-2">{data.title}</th>
+        <th className="border-l-2 border-r-2 p-2">
+          <Link to={`/projects/${data._id}`}>{data.title}</Link>
+        </th>
         <td className="border-l-2 p-2">{data.description}</td>
 
         <td className="border-l-2 p-2">
           {data.categories.map((c) => (
-            <p key={c}>{catsObj[c]}</p>
+            <p key={c}>
+              - {catsObj[c]}
+              <br />
+              <br />
+            </p>
           ))}
         </td>
         <td className="border-l-2 p-2">{data.location}</td>
@@ -106,13 +117,15 @@ const ProjectRow = ({ data, catsObj }) => {
         >
           {data.mainImage ? (
             <div className=" h-[130px] w-[200px] overflow-hidden rounded-xl ">
-              <img
-                className="max-h-[130px] rounded-xl object-cover transition-all duration-0 hover:absolute hover:scale-[120%]"
-                width="200px"
-                height="130px"
-                src={`${urls.assets}/${data.mainImage}`}
-                alt=""
-              />
+              <Link to={`/projects/${data._id}`}>
+                <img
+                  className="max-h-[130px] rounded-xl object-cover transition-all duration-0 hover:absolute hover:scale-[120%]"
+                  width="200px"
+                  height="130px"
+                  src={`${urls.assets}/${data.mainImage}`}
+                  alt=""
+                />
+              </Link>
             </div>
           ) : (
             <span

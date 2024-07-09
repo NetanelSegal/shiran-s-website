@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../../context/AppContext";
 
 const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
-  const nav = useNavigate();
   const { setProjectsData, setIsLoading } = useContext(AppContext);
 
   const getProjects = async () => {
@@ -39,7 +38,6 @@ const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
       let deleteData = {};
       deleteData.mainImage = await deleteMainImageApi();
       deleteData.plansAndImages = await deleteImgFromImgsApi();
-      console.log("deleteData: ", deleteData);
 
       // upload images after delete
       const fd = new FormData();
@@ -53,7 +51,7 @@ const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
       });
 
       const { data } = await apiPost(`${urls.uploadImgs}/${id}`, fd);
-      console.log(data);
+      console.log(deleteData);
       getProjects();
     } catch (err) {
       console.log("error: ", err);
@@ -101,7 +99,6 @@ const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
     const fieldToDeleteFrom =
       e.target.name == "btnDeleteImages" ? "images" : "plans";
 
-    console.log(fieldToDeleteFrom);
     setImagesDisplayPath((prev) => ({
       ...prev,
       [fieldToDeleteFrom]: prev[fieldToDeleteFrom].filter(
@@ -165,12 +162,6 @@ const ImagesMenu = ({ handleIsOpen, imagesData, id }) => {
       });
     }
   };
-
-  // useEffect(() => {
-  //   console.log("imagesDisplayPath: ", imagesDisplayPath);
-  //   console.log("imgsToDeleteData: ", imgsToDeleteData);
-  //   console.log("filesToUpload: ", filesToUpload);
-  // }, [imagesDisplayPath, imgsToDeleteData, filesToUpload]);
 
   return (
     <div className="fixed inset-0 z-20 flex items-center justify-center backdrop-blur-[2px]">

@@ -1,6 +1,6 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useEffect } from "react";
 import { useRef } from "react";
+import BoldParagraph from "../../../components/BoldParagraph";
 
 const Section2 = () => {
   const ref = useRef(null);
@@ -28,13 +28,13 @@ const Section2 = () => {
     >
       {/* text container */}
       <div className="lg:absolute lg:left-40 lg:w-1/4 xl:left-[18%] xl:w-1/5">
-        <h3>תיק מידע להיתר</h3>
+        <h3 className="mb-2 font-semibold">הפקת תיק מידע</h3>
         <p>
-          תיק מידע להיתר הוא השלב הראשון בהליך רישוי בניה. תיק המידע מכיל מידע
-          תכנוני, הנדסי ומרחבי מפורט המתמקד בכתובת ובעבודות המבוקשות: זכויות
-          הבניה בקרקע, תאום תשתיות עירוניות, הנחיות תכנוניות של גורמים שונים כמו
-          אגף תשתיות, כיבוי אש, איכה"ס, פיקוד העורף וחומרי עזר נוספים שישמשואת
-          המתכננים בעבודתם.
+          זהו שלב טכני שבו הוועדה לתכנון ובנייה מקבצת את המידע הרלוונטי עבורנו.
+          את המידע נקבל מגורמים שונים, כגון: פיקוד העורף, חברת חשמל, רשות
+          העתיקות וכו'. מידע זה
+          <BoldParagraph text={" ינחה וילווה אותנו "} />
+          לאורך כל שלבי התכנון והתנהלות מול הוועדה עד לשלב קבלת היתר הבנייה.
         </p>
       </div>
       {/* svg container */}
