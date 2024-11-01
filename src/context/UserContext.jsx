@@ -6,28 +6,35 @@ import { AppContext } from "./AppContext";
 const UserContext = createContext(null);
 
 const UserProvider = ({ children }) => {
-  const { setIsLoading } = useContext(AppContext);
-  const [user, setUser] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState(null);
 
   const checkUserAuth = async () => {
+    setIsLoading(true);
     try {
       const { data } = await apiGet(urls.checkUserAuth);
       setUser(data);
-      setIsLoading(false);
     } catch (err) {
+      setUser(null);
       console.log(err);
+    } finally {
       setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    checkUserAuth();
-  }, []);
+  // useEffect(() => {
+  //   checkUserAuth();
+  // }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, isLoading }}>
       {children}
     </UserContext.Provider>
   );
 };
-export { UserContext, UserProvider };
+
+function useUser() {
+  return useContext(UserContext);
+}
+
+export { useUser, UserProvider };

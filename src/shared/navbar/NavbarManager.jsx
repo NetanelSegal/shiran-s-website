@@ -2,11 +2,11 @@ import { useContext } from "react";
 import logoSrc from "../../assets/shiran_logo.svg";
 import NavbarDesktop from "./NavbarDesktop";
 import NavbarMobile from "./NavbarMobile";
-import { UserContext } from "../../context/UserContext";
+import { useUser } from "../../context/UserContext";
 import { AppContext } from "../../context/AppContext";
 
 const NavbarManager = () => {
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
   const { screenWidth } = useContext(AppContext);
 
   const navLinksUser = [

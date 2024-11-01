@@ -10,6 +10,11 @@ const SideMenu = ({ navLinks, setIsOpen, isOpen, btnExitRef }) => {
     open: { opacity: 1, y: "0" },
   };
   const handleClickOutside = ({ target }) => {
+    console.log("ref?.current", ref?.current);
+    console.log("target", target);
+
+    console.log("clicked outside");
+
     if (
       isOpen &&
       ref?.current != target &&
@@ -33,19 +38,24 @@ const SideMenu = ({ navLinks, setIsOpen, isOpen, btnExitRef }) => {
       initial="close"
       animate="open"
       exit="close"
-      transition={{ duration: 0.8, ease: "backInOut" }}
-      className="absolute left-0 right-0 top-14 -z-10 flex flex-col items-center gap-5 bg-white py-8 text-right"
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="absolute left-0 right-0 top-14 flex flex-col items-center gap-5 bg-white py-8 text-right"
     >
       {navLinks.map((e) => (
-        <li key={e.path}>
-          {e.path === "/contact" ? (
-            <Link to={e.path}>
-              <button className="my-btn-secondary">{e.title}</button>
-            </Link>
-          ) : (
-            <Link to={e.path}>{e.title}</Link>
-          )}
-        </li>
+        <Link className="z-20" key={e.path} to={e.path}>
+          <li key={e.path}>
+            {e.path === "/contact" ? (
+              <button
+                onClick={() => console.log("asd")}
+                className="my-btn-primary"
+              >
+                {e.title}
+              </button>
+            ) : (
+              e.title
+            )}
+          </li>
+        </Link>
       ))}
     </motion.ul>
   );

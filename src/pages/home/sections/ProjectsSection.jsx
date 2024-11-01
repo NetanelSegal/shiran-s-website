@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { selectedProjData } from "./content/projectsSectionContent";
 import FavoriteProjectsCarousel from "../../../shared/favoriteProjectsCarousel/FavoriteProjectsCarousel";
 
 const ProjectsSection = () => {
@@ -12,7 +11,7 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section className="horizontal-page-padding section overflow-hidden">
+    <section className="horizontal-page-padding overflow-hidden bg-white">
       <motion.div
         variants={enterAnimationVariants}
         initial="from"
@@ -20,10 +19,7 @@ const ProjectsSection = () => {
         viewport={{ once: true }}
         className="mb-5 items-end gap-2"
       >
-        <motion.h2 variants={enterAnimationVariants} className="font-bold">
-          הפרוייקטים שלנו
-        </motion.h2>
-        <FavoriteProjectsCarousel projects={selectedProjData} />
+        <FavoriteProjectsCarousel />
       </motion.div>
     </section>
   );

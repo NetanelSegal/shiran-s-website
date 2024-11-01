@@ -1,4 +1,4 @@
-const MAIN_URL = "https://shiran-s-server.onrender.com"
+const MAIN_URL = "http://localhost:3000"
 // http://localhost:3001
 
 export const urls = {
@@ -15,4 +15,5 @@ export const urls = {
     login: MAIN_URL + "/users" + "/login",
     categories: MAIN_URL + "/categories",
     assets: MAIN_URL + "/assets",
+    assets: "",
 }

@@ -26,13 +26,13 @@ const NavbarMobile = ({ logoSrc, navLinks }) => {
           <img className="h-10" src={logoSrc} alt="" />
         </Link>
         <div className="flex gap-2">
-          <img
+          {/* <img
             className="cursor-pointer"
             onClick={handleUserMenuOnClick}
             width="40"
             src={srcIconUser}
             alt={"user icon"}
-          />
+          /> */}
 
           <button
             ref={btnExitRef}

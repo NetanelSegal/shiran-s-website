@@ -2,17 +2,19 @@ import { useNavigate } from "react-router-dom";
 import ProjectForm from "../../components/admin/projectForm/ProjectForm";
 import { apiPost } from "../../utils/apiRequests";
 import { urls } from "../../constants/urls";
+import { useDataContext } from "../../context/DataContext";
 
 const AddProjectPage = () => {
+  const { getProjects } = useDataContext();
   const nav = useNavigate();
 
-  
   const onSubmit = async (pData, validation) => {
     const isValid = validation(pData);
     if (isValid) {
       try {
         const { data } = await apiPost(urls.projects, pData);
         alert("הפרוייקט הועלה בהצלחה");
+        getProjects();
         nav("/admin");
       } catch (error) {
         console.log(error);

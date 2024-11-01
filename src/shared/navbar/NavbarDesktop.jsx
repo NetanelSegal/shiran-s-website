@@ -31,7 +31,7 @@ const NavbarDesktop = ({ logoSrc, navLinks }) => {
               )}
             </li>
           ))}
-          <li className="relative">
+          {/* <li className="relative">
             <img
               className="cursor-pointer"
               onClick={handleUserMenuOnClick}
@@ -39,7 +39,7 @@ const NavbarDesktop = ({ logoSrc, navLinks }) => {
               src={srcIconUser}
               alt={"user icon"}
             />
-          </li>
+          </li> */}
         </ul>
         <AnimatePresence>
           {isUserMenuOn && (

@@ -3,9 +3,10 @@ import { urls } from "../../constants/urls";
 import FavoriteProjectsCarousel from "../../shared/favoriteProjectsCarousel/FavoriteProjectsCarousel";
 import { AppContext } from "../../context/AppContext";
 import { motion } from "framer-motion";
+import { useDataContext } from "../../context/DataContext";
 
 const ProjectPage = ({ data }) => {
-  const { categoriesCodeMap } = useContext(AppContext);
+  const { categoriesCodeMap } = useDataContext();
   const variants = { from: { opacity: 0 }, to: { opacity: 1 } };
   return (
     <>
@@ -27,6 +28,9 @@ const ProjectPage = ({ data }) => {
             {data.title}
           </motion.h3>
           <img
+            onError={(e) => {
+              e.target.src = `https://placehold.co/1920x1080`;
+            }}
             src={`${urls.assets}/${data.mainImage}`}
             alt=""
             className="h-full w-full object-cover"
@@ -40,53 +44,6 @@ const ProjectPage = ({ data }) => {
         transition={{ duration: 0.8, ease: "easeInOut", staggerChildren: 0.2 }}
         className="section horizontal-page-padding -mb-10"
       >
-        {/* <motion.div
-          variants={variants}
-          className="mb-10 flex flex-col gap-5 md:flex-row"
-        >
-          <table className="grow border-collapse rounded-2xl text-lg md:w-1/2">
-            <tbody>
-              <tr className="border-b-2 border-[#ccbebc]">
-                <td className="p-2 text-right">תגיות: </td>
-                <th className="p-2 text-right">
-                  <div className="flex gap-2">
-                    {data.categories.map((catCode, i) => (
-                      <p
-                        key={catCode + i}
-                        className="my-bg-secondary rounded-lg px-3 py-1
-          text-center text-sm font-semibold"
-                      >
-                        {categoriesCodeMap[catCode]}
-                      </p>
-                    ))}
-                  </div>
-                </th>
-              </tr>
-              <tr className="border-b-2 border-[#ccbebc]">
-                <td className="p-2 text-right">לקוח: </td>
-                <th className="p-2 text-right">{data.client}</th>
-              </tr>
-              <tr className="border-b-2 border-[#ccbebc]">
-                <td className="p-2 text-right">סטטוס:</td>
-                <th className=" p-2 text-right">
-                  {data.isCompleted ? "הושלם" : "בתהליך"}
-                </th>
-              </tr>
-              <tr className="border-b-2 border-[#ccbebc]">
-                <td className="p-2 text-right">שטח בנייה:</td>
-                <th className=" p-2 text-right"> {data.constructionArea}</th>
-              </tr>
-              <tr className="">
-                <td className="p-2 text-right">מיקום:</td>
-                <th className=" p-2 text-right"> {data.location}</th>
-              </tr>
-            </tbody>
-          </table>
-          <p variants={variants} className="md:w-1/2">
-            {data.description}
-          </p>
-        </motion.div> */}
-
         <motion.div
           variants={variants}
           className="mb-10 flex flex-col items-center"
@@ -129,7 +86,10 @@ const ProjectPage = ({ data }) => {
               </tr>
             </tbody>
           </table>
-          <motion.p variants={variants} className="mt-10 w-full pl-[30%]">
+          <motion.p
+            variants={variants}
+            className="mt-10 w-full break-words pl-[30%]"
+          >
             {data.description}
           </motion.p>
         </motion.div>
@@ -139,8 +99,13 @@ const ProjectPage = ({ data }) => {
           whileInView="to"
           className="my-5 flex w-full flex-col gap-2 md:flex-row"
         >
+          {!data.images.length && <p>אין תוכניות עדיין</p>}
+
           {data.plans.map((img, i) => (
             <motion.img
+              onError={(e) => {
+                e.target.src = `https://placehold.co/600x400`;
+              }}
               viewport={{ once: true }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -158,8 +123,12 @@ const ProjectPage = ({ data }) => {
           whileInView="to"
           className="my-5 mb-10 flex w-full flex-col justify-between gap-2 md:flex-row"
         >
+          {!data.images.length && <p>אין תמונות עדיין</p>}
           {data.images.map((img, i) => (
             <motion.img
+              onError={(e) => {
+                e.target.src = `https://placehold.co/600x400`;
+              }}
               viewport={{ once: true }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}

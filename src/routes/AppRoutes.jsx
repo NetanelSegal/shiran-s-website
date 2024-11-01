@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import HomePage from "../pages/home/HomePage.jsx";
+import ErrorPageNotFound from "../pages/errorPageNotFound/ErrorPageNotFound.jsx";
 import ProjectsPage from "../pages/projects/ProjectsPage.jsx";
 import AboutPage from "../pages/about/AboutPage.jsx";
 import TheProcessPage from "../pages/theProcess/TheProcessPage.jsx";
@@ -9,18 +10,17 @@ import LoginPage from "../pages/login/LoginPage.jsx";
 import SignupPage from "../pages/signup/SignupPage.jsx";
 import AdminPage from "../pages/admin/AdminPage.jsx";
 import ProjectPage from "../pages/project/ProjectPage.jsx";
-import { useContext } from "react";
-import { UserContext } from "../context/UserContext.jsx";
-import { AppContext } from "../context/AppContext.jsx";
+import { useUser } from "../context/UserContext.jsx";
 import PageLoader from "../shared/loaders/PageLoader.jsx";
 import EditProjectPage from "../pages/admin/EditProjectPage.jsx";
 import AddProjectPage from "../pages/admin/AddProjectPage.jsx";
+import { useDataContext } from "../context/DataContext.jsx";
 
 const AppRoutes = () => {
-  const { user } = useContext(UserContext);
-  const { isLoading, projectsData } = useContext(AppContext);
+  const { user, isLoading: isUserLoading } = useUser();
+  const { isLoading, projectsData } = useDataContext();
 
-  if (isLoading) {
+  if (isUserLoading || isLoading) {
     return <PageLoader />;
   }
 
@@ -41,7 +41,6 @@ const AppRoutes = () => {
             element={<ProjectPage data={p} />}
           />
         ))}
-        <Route path="*" element={<h1>404 page not found</h1>} />
 
         {/* admin routes */}
         {(user?.role === "admin" || user?.role === "developer") && (
@@ -57,6 +56,7 @@ const AppRoutes = () => {
             <Route path="admin/add-project" element={<AddProjectPage />} />
           </>
         )}
+        <Route path="*" element={<ErrorPageNotFound />} />
       </Route>
     </Routes>
   );

@@ -12,7 +12,7 @@ const ClickToCopy = ({ children }) => {
   return (
     <>
       <span
-        className="relative"
+        className="relative cursor-pointer"
         onMouseLeave={() => {
           setIsHover(false);
         }}
@@ -26,7 +26,7 @@ const ClickToCopy = ({ children }) => {
           <span
             dir="rtl"
             ref={tooltipRef}
-            className="my-bg-secondary absolute left-full top-1/2 ml-2 w-max -translate-y-1/2 rounded-lg bg-white px-4 py-2  font-semibold"
+            className="my-bg-secondary absolute left-full top-1/2 ml-2 w-max -translate-y-1/2  rounded-lg bg-white px-4 py-2  font-semibold"
           >
             לחץ להעתקה
           </span>

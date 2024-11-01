@@ -3,14 +3,17 @@ import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./context/UserContext.jsx";
 import { AppProvider } from "./context/AppContext.jsx";
 import AppRoutes from "./routes/AppRoutes.jsx";
+import DataProvider from "./context/DataContext.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <AppProvider>
-        <UserProvider>
-          <AppRoutes />
-        </UserProvider>
+        <DataProvider>
+          <UserProvider>
+            <AppRoutes />
+          </UserProvider>
+        </DataProvider>
       </AppProvider>
     </BrowserRouter>
   );

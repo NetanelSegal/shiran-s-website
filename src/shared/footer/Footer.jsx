@@ -6,12 +6,12 @@ import srcIconInstagram from "../../assets/icons/instagram.svg";
 import srcShiranLogo from "../../assets/shiran_logo.svg";
 import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
-import { useContext, useRef } from "react";
-import { UserContext } from "../../context/UserContext";
+import { useRef } from "react";
+import { useUser } from "../../context/UserContext";
 import ClickToCopy from "../../components/clickToCopy/ClickToCopy";
 
 const Footer = () => {
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
   const shiransContactInfo = [
     {
       srcIcon: srcIconTel,

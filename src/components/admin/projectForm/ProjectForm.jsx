@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AppContext } from "../../../context/AppContext";
 import Joi from "joi";
+import { useDataContext } from "../../../context/DataContext";
 
 const ProjectForm = ({ data, onSubmit }) => {
   // inputs code
@@ -11,7 +12,7 @@ const ProjectForm = ({ data, onSubmit }) => {
   const statusInpsRefs = useRef([]);
   const descriptionInpRef = useRef();
 
-  const { categoriesCodeMap } = useContext(AppContext);
+  const { categoriesCodeMap } = useDataContext();
   const textInputsfeilds = ["title", "location", "client"];
   const labelsText = ["כותרת", "מיקום", "לקוח"];
 
@@ -236,22 +237,23 @@ const ProjectForm = ({ data, onSubmit }) => {
         >
           קטגוריות
         </motion.label>
-        {Object.entries(categoriesCodeMap).map((c, i) => (
-          <label
-            key={c}
-            className=" grow rounded-xl border-4 border-[#ccbebc] py-2 text-center text-black"
-          >
-            {c[1]}
-            <input
-              ref={(e) => (categoriesInpsRefs.current[i] = e)}
-              id={c[0]}
-              onChange={handleCategorySelection}
-              type="checkbox"
-              value={c[0]}
-              className="project-form-input hidden"
-            />
-          </label>
-        ))}
+        {categoriesCodeMap &&
+          Object.entries(categoriesCodeMap).map((c, i) => (
+            <label
+              key={c}
+              className=" grow rounded-xl border-4 border-[#ccbebc] py-2 text-center text-black"
+            >
+              {c[1]}
+              <input
+                ref={(e) => (categoriesInpsRefs.current[i] = e)}
+                id={c[0]}
+                onChange={handleCategorySelection}
+                type="checkbox"
+                value={c[0]}
+                className="project-form-input hidden"
+              />
+            </label>
+          ))}
       </div>
       {errors?.categories && (
         <span className="block text-red-500">* {errors.categories}</span>

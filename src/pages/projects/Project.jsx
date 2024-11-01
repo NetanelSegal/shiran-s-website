@@ -64,6 +64,7 @@ const Project = ({ catsObj, data, i }) => {
         >
           <ParallaxEffect stiffness={"-50%"} parentRef={projectContainerRef}>
             <img
+              onError={(e) => (e.target.src = `https://placehold.co/600x400`)}
               onClick={() => nav(`/projects/${data._id}`)}
               className="h-[150%] w-full cursor-pointer object-cover transition-all duration-300  ease-in-out
         hover:scale-125"
@@ -104,7 +105,7 @@ const Project = ({ catsObj, data, i }) => {
             </motion.p>
           ))}
         </motion.div>
-        <motion.p variants={textContainerVariants}>
+        <motion.p className="break-words" variants={textContainerVariants}>
           <strong>תיאור הפרוייקט: </strong>
           {data.description} <br />
           <Link

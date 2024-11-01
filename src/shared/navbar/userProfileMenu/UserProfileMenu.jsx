@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../../context/UserContext";
+import { useUser } from "../../../context/UserContext";
 
 const UserProfileMenu = ({ onExit, isOpen, setIsOpen }) => {
   const variants = {
@@ -30,7 +30,7 @@ const UserProfileMenu = ({ onExit, isOpen, setIsOpen }) => {
   }, []);
 
   // user management
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useUser();
   const nav = useNavigate();
 
   const onLogout = () => {
